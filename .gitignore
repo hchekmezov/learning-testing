@@ -1,0 +1,5 @@
+resources/
+src/gui/constants.py
+src/mobile/utils/constants.py
+.idea/learningTesing.iml
+agent.yaml
