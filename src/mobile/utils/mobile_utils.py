@@ -25,10 +25,13 @@ class Dimension():
         return self.__height
 
     def __eq__(self, o: object) -> bool:
-        return super().__eq__(o)
+        if isinstance(o, Dimension):
+            return self.__width == o.__width and self.__height == o.__height
+        else:
+            return False
 
     def __str__(self) -> str:
-        return "({width}, {height})".format(width=self.__width, height=self.__height)
+        return "(width = {width}, height = {height})".format(width=self.__width, height=self.__height)
 
     # def __repr__(self) -> str:
     #     return super().__repr__()
@@ -60,7 +63,7 @@ class Point:
         return hash((self.x, self.y))
 
     def __str__(self):
-        return f"({self.x}, {self.y})"
+        return f"(x = {self.x}, y = {self.y})"
 
 
 

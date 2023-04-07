@@ -14,8 +14,8 @@ logger.addHandler(ZebrunnerHandler())
 logger.setLevel(logging.INFO)
 
 
-def test_fit_first(mobile_driver_opening_and_closing):
-    logger.info("Google fit first test starting...")
+def login_method(mobile_driver_opening_and_closing):
+    # logger.info("Google fit first test starting...")
     driver = mobile_driver_opening_and_closing
     continue_as_page = ContinueAsPage(driver)
     assert continue_as_page.is_page_opened(), "[Continue As Page] Continue As Page in not opened!"
@@ -30,6 +30,13 @@ def test_fit_first(mobile_driver_opening_and_closing):
     track_activities_page.click_no_thanks_button()
     home_page = HomePage(driver)
     assert home_page.is_page_opened(), "[Home Page] Home Page is not opened after clicking No Thanks Button!"
+    return home_page
 
 
-
+# check by the XPATH
+def test_plus_button_static(mobile_driver_opening_and_closing):
+    driver = mobile_driver_opening_and_closing
+    home_page = login_method(driver)
+    assert home_page.is_plus_button_present(), "[Home Page] Plus Button is not present!"
+    assert home_page.is_plus_button_static(), "[Home Page] Plus Button is not static!"
+    assert home_page.is_plus_button_below_container(), "[Home Page] Plus Button is not below the container!"
