@@ -77,7 +77,9 @@ def isVisibleMethod(timeout, locator, driver) -> bool:
 
 #                    element  ,    direction
 def swipeInContainer(container, direction, count, duration, driver, os: OS) -> bool:
-        """**container** should be transferred like: *driver.find_element(container[0], container[1])*"""
+        """**container** should be transferred like: *driver.find_element(container[0], container[1])*
+        or
+        *driver.find_element(\*container)*"""
 
         elementLocation = None # Point
         elementDimensions = None # Dimension
@@ -166,10 +168,10 @@ def swipe(locator, container, direction: Direction, count: int, duration: int, d
 
         if isVisible:
             element = driver.find_element(locator[0], locator[1])
-            logger.info("element already present before swipe: " + str(element))
+            logger.info("Element already present before swipe: " + str(element))
             return True
         else:
-            logger.info("swiping to needed element")
+            logger.info("Swiping to needed element")
             oppositeDirection = Direction.DOWN
             bothDirections = False
             if direction.value == "UP":
@@ -266,3 +268,21 @@ def swipeLeftInContainerWithCount(container, duration: int, count: int, driver, 
     for i in range(count):
         swipeLeftInContainer(container, duration, driver, os)
 
+
+def swipeToElementUp(locator, driver: Remote, os: OS) -> bool:
+    return swipe(locator, None, Direction.UP, 50, 1000, driver, os)
+
+def swipeToElementUpWithCount(locator, count: int, driver: Remote, os: OS) -> bool:
+    return swipe(locator, None, Direction.UP, count, 1000, driver, os)
+
+def swipeToElementUpWithDuration(locator, duration: int, driver: Remote, os: OS) -> bool:
+    return swipe(locator, None, Direction.UP, 50, duration, driver, os)
+
+def swipeToElementDown(locator, driver: Remote, os: OS) -> bool:
+    return swipe(locator, None, Direction.DOWN, 50, 1000, driver, os)
+
+def swipeToElementDownWithCount(locator, count: int, driver: Remote, os: OS) -> bool:
+    return swipe(locator, None, Direction.DOWN, count, 1000, driver, os)
+
+def swipeToElementDownWithDuration(locator, duration: int, driver: Remote, os: OS) -> bool:
+    return swipe(locator, None, Direction.DOWN, 50, duration, driver, os)

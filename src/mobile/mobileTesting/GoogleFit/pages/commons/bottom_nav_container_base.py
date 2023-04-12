@@ -15,3 +15,7 @@ class BottomNavContainerBase(AbstractUIObject):
     @abc.abstractmethod
     def is_nav_container_button_selected(self, nav_container_button: NavContainerButton):
         return
+
+    @abc.abstractmethod
+    def click_nav_container_button(self, nav_container_button: NavContainerButton):
+        return
