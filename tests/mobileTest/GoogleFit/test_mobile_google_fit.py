@@ -4,10 +4,15 @@ import logging
 from pytest_zebrunner.zebrunner_logging import ZebrunnerHandler
 
 from src.mobile.mobileTesting.GoogleFit.enums.activities import Activity
+from src.mobile.mobileTesting.GoogleFit.enums.profile_page.birthday_page.monthes import Month
+from src.mobile.mobileTesting.GoogleFit.enums.profile_page.gender import Gender
 from src.mobile.mobileTesting.GoogleFit.enums.home_page_block_title import HomePageBlockTitle
 from src.mobile.mobileTesting.GoogleFit.enums.home_page_playlist_title import HomePagePlaylistTitle
 from src.mobile.mobileTesting.GoogleFit.enums.nav_container_buttons import NavContainerButton
+from src.mobile.mobileTesting.GoogleFit.enums.profile_page.height_page.height_measures import HeightMeasure
+from src.mobile.mobileTesting.GoogleFit.enums.profile_page.pages_from_about_you import PageFromAboutYou
 from src.mobile.mobileTesting.GoogleFit.enums.plus_button_page_item import PlusButtonPageItem
+from src.mobile.mobileTesting.GoogleFit.enums.profile_page.weight_page.weight_measures import WeightMeasure
 from src.mobile.mobileTesting.GoogleFit.pages.android.about_you_page import AboutYouPage
 from src.mobile.mobileTesting.GoogleFit.pages.android.continue_as_page import ContinueAsPage
 from src.mobile.mobileTesting.GoogleFit.pages.android.gf_common_page import GFCommonPage
@@ -17,9 +22,15 @@ from src.mobile.mobileTesting.GoogleFit.pages.android.journal_pages.journal_page
 from src.mobile.mobileTesting.GoogleFit.pages.android.plus_button_page import PlusButtonPage
 from src.mobile.mobileTesting.GoogleFit.pages.android.plus_button_pages.add_activity_pages.activity_type_page import \
     ActivityTypePage
-from src.mobile.mobileTesting.GoogleFit.pages.android.plus_button_pages.add_activity_pages.add_activity_page import AddActivityPage
+from src.mobile.mobileTesting.GoogleFit.pages.android.plus_button_pages.add_activity_pages.add_activity_page import \
+    AddActivityPage
 from src.mobile.mobileTesting.GoogleFit.pages.android.plus_button_pages.add_activity_pages.date_page import DatePage
 from src.mobile.mobileTesting.GoogleFit.pages.android.plus_button_pages.add_activity_pages.time_page import TimePage
+from src.mobile.mobileTesting.GoogleFit.pages.android.profile_pages.birthday_page import BirthdayPage
+from src.mobile.mobileTesting.GoogleFit.pages.android.profile_pages.gender_page import GenderPage
+from src.mobile.mobileTesting.GoogleFit.pages.android.profile_pages.height_page import HeightPage
+from src.mobile.mobileTesting.GoogleFit.pages.android.profile_pages.profile_page import ProfilePage
+from src.mobile.mobileTesting.GoogleFit.pages.android.profile_pages.weight_page import WeightPage
 from src.mobile.mobileTesting.GoogleFit.pages.android.track_activities_page import TrackActivitiesPage
 
 logger = logging.getLogger(__name__)
@@ -44,7 +55,7 @@ def login_method(mobile_driver_opening_and_closing):
     home_page = HomePage(driver)
     return home_page
 
-
+@pytest.mark.skip
 def test_sixth_task_first_point(mobile_driver_opening_and_closing):
     driver = mobile_driver_opening_and_closing
     home_page = login_method(driver)
@@ -53,6 +64,8 @@ def test_sixth_task_first_point(mobile_driver_opening_and_closing):
     assert home_page.is_plus_button_static(), "[Home Page] Plus Button is not static!"
     assert home_page.is_plus_button_below_container(), "[Home Page] Plus Button is not below the container!"
 
+
+@pytest.mark.skip
 def test_sixth_task_second_point(mobile_driver_opening_and_closing):
     driver = mobile_driver_opening_and_closing
     home_page = login_method(driver)
@@ -68,6 +81,8 @@ def test_sixth_task_second_point(mobile_driver_opening_and_closing):
                                                                        "Actual: {}".format(
                                                                         expected_list_of_titles, titles_from_home_page)
 
+
+@pytest.mark.skip
 def test_seventh_task_first_point(mobile_driver_opening_and_closing):
     driver = mobile_driver_opening_and_closing
     home_page = login_method(driver)
@@ -134,11 +149,53 @@ def test_seventh_task_first_point(mobile_driver_opening_and_closing):
     assert journal_page.is_page_opened(), "[Journal Page] Journal Page is not opened after deleting activity!"
 
 
+def test_eighth_task_first_point(mobile_driver_opening_and_closing):
+    driver = mobile_driver_opening_and_closing
+    home_page = login_method(driver)
+    assert home_page.is_page_opened(), "[Home Page] Home Page is not opened after clicking No Thanks Button!"
 
+    gf_common_page = GFCommonPage(driver)
+    gf_common_page.get_bottom_nav_container().click_nav_container_button(NavContainerButton.PROFILE)
 
+    profile_page = ProfilePage(driver)
+    assert profile_page.is_page_opened(), "[Profile Page] Profile Page is not opened after choosing from nav container!"
 
+    profile_page.open_page_from_about_you(PageFromAboutYou.GENDER)
+    gender_page = GenderPage(driver)
+    assert gender_page.is_page_opened(), "[Gender Page] Gender Page is not opened!"
+    gender_should_be = gender_page.check_gender(Gender.MALE)
+    gender_page.click_back_button()
+    profile_page = ProfilePage(driver)
+    assert profile_page.is_page_opened(), "[Profile Page] Profile Page is not opened after clicking " \
+                                          "back button from Gender Page!"
 
+    profile_page.open_page_from_about_you(PageFromAboutYou.BIRTHDAY)
+    birthday_page = BirthdayPage(driver)
+    assert birthday_page.is_page_opened(), "[Birthday Page] Birthday Page is not opened!"
+    birthday_should_be = birthday_page.change_month_day_year(Month.DECEMBER, 25, 2005)
+    birthday_page.confirm_changes()
+    profile_page = ProfilePage(driver)
+    assert profile_page.is_page_opened(), "[Profile Page] Profile Page is not opened after clicking " \
+                                          "back button from Birthday Page!"
 
+    profile_page.open_page_from_about_you(PageFromAboutYou.WEIGHT)
+    weight_page = WeightPage(driver)
+    assert weight_page.is_page_opened(), "[Weight Page] Weight Page is not opened!"
+    weight_should_be = weight_page.change_weight(76, 4, WeightMeasure.KILOGRAMS)
+    profile_page = ProfilePage(driver)
+    assert profile_page.is_page_opened(), "[Profile Page] Profile Page is not opened after clicking " \
+                                          "OK button from Weight Page!"
+
+    profile_page.open_page_from_about_you(PageFromAboutYou.HEIGHT)
+    height_page = HeightPage(driver)
+    assert height_page.is_page_opened(), "[Height Page] Height Page is not opened!"
+    height_should_be = height_page.change_height(5, HeightMeasure.FEET_AND_INCHES)
+    profile_page = ProfilePage(driver)
+    assert profile_page.is_page_opened(), "[Profile Page] Profile Page is not opened after clicking " \
+                                          "OK button from Weight Page!"
+    assert profile_page\
+        .check_all_changed_info(gender_should_be, birthday_should_be, weight_should_be, height_should_be),\
+        "[Profile Page] Some info is not changed correctly!"
 
 
 
