@@ -269,6 +269,12 @@ def swipeLeftInContainerWithCount(container, duration: int, count: int, driver, 
         swipeLeftInContainer(container, duration, driver, os)
 
 
+def swipeToElement(locator, driver: Remote, os: OS):
+    return swipe(locator, None, Direction.VERTICAL, 50, 1000, driver, os)
+
+def swipeToElementWithCount(locator, count: int, driver: Remote, os: OS):
+    return swipe(locator, None, Direction.VERTICAL, count, 1000, driver, os)
+
 def swipeToElementUp(locator, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.UP, 50, 1000, driver, os)
 

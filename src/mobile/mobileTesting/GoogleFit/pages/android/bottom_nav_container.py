@@ -1,6 +1,9 @@
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver import Remote
 
+from src.mobile.mobileTesting.GoogleFit.enums.icons import Icons
+from src.mobile.mobileTesting.GoogleFit.enums.labels import Labels
+
 from src.mobile.mobileTesting.GoogleFit.enums.nav_container_buttons import NavContainerButton
 from src.mobile.mobileTesting.GoogleFit.pages.commons.bottom_nav_container_base import BottomNavContainerBase
 
@@ -27,6 +30,5 @@ class BottomNavContainer(BottomNavContainerBase):
                                         "bottom_navigation']"
                                         "//android.widget.FrameLayout[@content-desc='{}']"
                                         .format(nav_container_button.value)).click()
-
 
 

@@ -1,7 +1,7 @@
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver import Remote
 
-from src.mobile.mobileTesting.GoogleFit.enums.profile_page.gender import Gender
+from src.mobile.mobileTesting.GoogleFit.enums.profile_page.gender_page.gender import Gender
 from src.mobile.mobileTesting.GoogleFit.pages.commons.profile_pages.gender_page_base import GenderPageBase
 from selenium.webdriver.support import expected_conditions as EC
 

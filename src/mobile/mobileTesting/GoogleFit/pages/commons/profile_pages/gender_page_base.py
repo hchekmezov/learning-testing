@@ -3,7 +3,7 @@ import abc
 from selenium.webdriver import Remote
 
 from src.mobile.abstract.abstract_page import AbstractPage
-from src.mobile.mobileTesting.GoogleFit.enums.profile_page.gender import Gender
+from src.mobile.mobileTesting.GoogleFit.enums.profile_page.gender_page.gender import Gender
 
 
 class GenderPageBase(AbstractPage):

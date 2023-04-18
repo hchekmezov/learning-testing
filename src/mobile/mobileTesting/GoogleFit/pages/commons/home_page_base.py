@@ -3,7 +3,8 @@ import abc
 from selenium.webdriver import Remote
 
 from src.mobile.abstract.abstract_page import AbstractPage
-from src.mobile.mobileTesting.GoogleFit.enums.home_page_block_title import HomePageBlockTitle
+from src.mobile.mobileTesting.GoogleFit.enums.home_page.home_page_block_title import HomePageBlockTitle
+from src.mobile.mobileTesting.GoogleFit.enums.home_page.home_page_first_titles import FirstTitles
 
 
 class HomePageBase(AbstractPage):
@@ -37,5 +38,11 @@ class HomePageBase(AbstractPage):
     @abc.abstractmethod
     def click_plus_button(self):
         return
+
+    @abc.abstractmethod
+    def get_color_of_account_image(self):
+        return
+
+
 
 

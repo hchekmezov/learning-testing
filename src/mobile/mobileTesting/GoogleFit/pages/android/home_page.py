@@ -1,15 +1,13 @@
 from appium.webdriver.common.appiumby import AppiumBy
-from selenium.webdriver import Remote
 
-from src.mobile.mobileTesting.GoogleFit.enums.home_page_block_title import HomePageBlockTitle
+from src.mobile.mobileTesting.GoogleFit.enums.home_page.home_page_block_title import HomePageBlockTitle
+from src.mobile.mobileTesting.GoogleFit.enums.home_page.home_page_first_titles import FirstTitles
 from src.mobile.mobileTesting.GoogleFit.enums.nav_container_buttons import NavContainerButton
 from src.mobile.mobileTesting.GoogleFit.pages.android.gf_common_page import GFCommonPage
 from src.mobile.mobileTesting.GoogleFit.pages.android.plus_button_modal import PlusButtonModal
 from src.mobile.mobileTesting.GoogleFit.pages.commons.home_page_base import HomePageBase
-from selenium.webdriver.support import expected_conditions as EC
 from src.mobile.utils.mobile_utils import *
 from src.mobile.utils.operating_system import OS
-from src.mobile.utils.direction import Direction
 from selenium.webdriver.remote.webelement import WebElement
 
 
@@ -31,6 +29,11 @@ class HomePage(HomePageBase):
         self.__playlist_button_title = (
             AppiumBy.XPATH, "//*[@resource-id='com.google.android.apps.fitness:id/playlist_button']"
                             "//*[@resource-id='com.google.android.apps.fitness:id/title']")
+
+        self.__account_image = (AppiumBy.ID, "com.google.android.apps.fitness:id/og_apd_internal_image_view")
+
+         # colors
+        self.__card_custom_chart_title = (AppiumBy.ID, "com.google.android.apps.fitness:id/card_custom_chart_title")
 
     def is_page_opened(self) -> bool:
         return self.wait.until(EC.visibility_of_element_located(self.__lottie_celebration)) \
@@ -77,6 +80,9 @@ class HomePage(HomePageBase):
 
     def click_plus_button(self):
         self.driver.find_element(*self.__plus_button).click()
+
+    def get_color_of_account_image(self):
+        return GFCommonPage(self.driver).get_color_of_element(self.__account_image)
 
 
 

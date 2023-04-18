@@ -4,14 +4,20 @@ import logging
 from pytest_zebrunner.zebrunner_logging import ZebrunnerHandler
 
 from src.mobile.mobileTesting.GoogleFit.enums.activities import Activity
+from src.mobile.mobileTesting.GoogleFit.enums.home_page.home_page_first_titles import FirstTitles
+from src.mobile.mobileTesting.GoogleFit.enums.icons import Icons
+from src.mobile.mobileTesting.GoogleFit.enums.labels import Labels
 from src.mobile.mobileTesting.GoogleFit.enums.profile_page.birthday_page.monthes import Month
-from src.mobile.mobileTesting.GoogleFit.enums.profile_page.gender import Gender
-from src.mobile.mobileTesting.GoogleFit.enums.home_page_block_title import HomePageBlockTitle
-from src.mobile.mobileTesting.GoogleFit.enums.home_page_playlist_title import HomePagePlaylistTitle
+from src.mobile.mobileTesting.GoogleFit.enums.colors import Color
+from src.mobile.mobileTesting.GoogleFit.enums.profile_page.gender_page.gender import Gender
+from src.mobile.mobileTesting.GoogleFit.enums.home_page.home_page_block_title import HomePageBlockTitle
+from src.mobile.mobileTesting.GoogleFit.enums.home_page.home_page_playlist_title import HomePagePlaylistTitle
 from src.mobile.mobileTesting.GoogleFit.enums.nav_container_buttons import NavContainerButton
 from src.mobile.mobileTesting.GoogleFit.enums.profile_page.height_page.height_measures import HeightMeasure
 from src.mobile.mobileTesting.GoogleFit.enums.profile_page.pages_from_about_you import PageFromAboutYou
 from src.mobile.mobileTesting.GoogleFit.enums.plus_button_page_item import PlusButtonPageItem
+from src.mobile.mobileTesting.GoogleFit.enums.profile_page.settings_page.settings_titles import SettingsTitle
+from src.mobile.mobileTesting.GoogleFit.enums.profile_page.switchers import Switcher
 from src.mobile.mobileTesting.GoogleFit.enums.profile_page.weight_page.weight_measures import WeightMeasure
 from src.mobile.mobileTesting.GoogleFit.pages.android.about_you_page import AboutYouPage
 from src.mobile.mobileTesting.GoogleFit.pages.android.continue_as_page import ContinueAsPage
@@ -30,6 +36,7 @@ from src.mobile.mobileTesting.GoogleFit.pages.android.profile_pages.birthday_pag
 from src.mobile.mobileTesting.GoogleFit.pages.android.profile_pages.gender_page import GenderPage
 from src.mobile.mobileTesting.GoogleFit.pages.android.profile_pages.height_page import HeightPage
 from src.mobile.mobileTesting.GoogleFit.pages.android.profile_pages.profile_page import ProfilePage
+from src.mobile.mobileTesting.GoogleFit.pages.android.profile_pages.settings_page import SettingsPage
 from src.mobile.mobileTesting.GoogleFit.pages.android.profile_pages.weight_page import WeightPage
 from src.mobile.mobileTesting.GoogleFit.pages.android.track_activities_page import TrackActivitiesPage
 
@@ -55,7 +62,7 @@ def login_method(mobile_driver_opening_and_closing):
     home_page = HomePage(driver)
     return home_page
 
-@pytest.mark.skip
+
 def test_sixth_task_first_point(mobile_driver_opening_and_closing):
     driver = mobile_driver_opening_and_closing
     home_page = login_method(driver)
@@ -65,13 +72,12 @@ def test_sixth_task_first_point(mobile_driver_opening_and_closing):
     assert home_page.is_plus_button_below_container(), "[Home Page] Plus Button is not below the container!"
 
 
-@pytest.mark.skip
 def test_sixth_task_second_point(mobile_driver_opening_and_closing):
     driver = mobile_driver_opening_and_closing
     home_page = login_method(driver)
     assert home_page.is_page_opened(), "[Home Page] Home Page is not opened after clicking No Thanks Button!"
     for title in HomePageBlockTitle:
-        assert home_page.is_block_by_title_present(title), "[Home Page] Block with title <<{}>> is not present!"\
+        assert home_page.is_block_by_title_present(title), "[Home Page] Block with title <<{}>> is not present!" \
             .format(title.value)
     titles_from_home_page = home_page.get_list_of_playlist_titles()
     expected_list_of_titles = HomePagePlaylistTitle.get_playlist_titles_values()
@@ -79,10 +85,9 @@ def test_sixth_task_second_point(mobile_driver_opening_and_closing):
                                                                        "are different from Expected List\n" \
                                                                        "Expected: {}\n" \
                                                                        "Actual: {}".format(
-                                                                        expected_list_of_titles, titles_from_home_page)
+        expected_list_of_titles, titles_from_home_page)
 
 
-@pytest.mark.skip
 def test_seventh_task_first_point(mobile_driver_opening_and_closing):
     driver = mobile_driver_opening_and_closing
     home_page = login_method(driver)
@@ -193,9 +198,133 @@ def test_eighth_task_first_point(mobile_driver_opening_and_closing):
     profile_page = ProfilePage(driver)
     assert profile_page.is_page_opened(), "[Profile Page] Profile Page is not opened after clicking " \
                                           "OK button from Weight Page!"
-    assert profile_page\
-        .check_all_changed_info(gender_should_be, birthday_should_be, weight_should_be, height_should_be),\
+    assert profile_page \
+        .check_all_changed_info(gender_should_be, birthday_should_be, weight_should_be, height_should_be), \
         "[Profile Page] Some info is not changed correctly!"
+
+
+def test_ninth_task_first_point(mobile_driver_opening_and_closing):
+    driver = mobile_driver_opening_and_closing
+    home_page = login_method(driver)
+    assert home_page.is_page_opened(), "[Home Page] Home Page is not opened after clicking No Thanks Button!"
+
+    gf_common_page = GFCommonPage(driver)
+
+    color_of_title = gf_common_page.get_color_of_element(FirstTitles.ZERO_SEVEN.value)
+    assert color_of_title == Color.BLUE.value, "[Home Page] Color of title element is not expected! " \
+                                               "Actul: {}; Expected: {}".format(color_of_title,
+                                                                                Color.BLUE.value)
+    color_of_title = gf_common_page.get_color_of_element(FirstTitles.ZERO_HUNDRED_FIFTY.value)
+    assert color_of_title == Color.GREEN.value, "[Home Page] Color of title element is not expected! " \
+                                                "Actul: {}; Expected: {}".format(color_of_title,
+                                                                                 Color.GREEN.value)
+
+
+def test_ninth_task_second_point(mobile_driver_opening_and_closing):
+    driver = mobile_driver_opening_and_closing
+    home_page = login_method(driver)
+    assert home_page.is_page_opened(), "[Home Page] Home Page is not opened after clicking No Thanks Button!"
+
+    gf_common_page = GFCommonPage(driver)
+    home_label_color = gf_common_page.get_color_of_element(Labels.HOME_LABEL.value)
+    home_icon_color = gf_common_page.get_color_of_element(Icons.HOME_ICON.value)
+
+    assert home_label_color == Color.BLUE.value, "[Home Page] Label color is not BLUE! Actual {}".format(
+        home_label_color)
+    assert home_icon_color == Color.BLUE.value, "[Home Page] Icon color is not BLUE! Actual {}".format(home_icon_color)
+
+    gf_common_page.get_bottom_nav_container().click_nav_container_button(NavContainerButton.PROFILE)
+
+    profile_page = ProfilePage(driver)
+
+    assert profile_page.is_page_opened(), "[Profile Page] Profile Page is not opened after clicking " \
+                                          "on Nav Container Button!"
+
+    profile_label_color = gf_common_page.get_color_of_element(Labels.PROFILE_LABEL.value)
+    profile_icon_color = gf_common_page.get_color_of_element(Icons.PROFILE_ICON.value)
+
+    assert profile_label_color == Color.BLUE.value, "[Profile Page] Label color is not BLUE! Actual {}".format(
+        profile_label_color)
+    assert profile_icon_color == Color.BLUE.value, "[Profile Page] Icon color is not BLUE! Actual {}".format(
+        profile_icon_color)
+
+
+def test_ninth_task_third_point(mobile_driver_opening_and_closing):
+    driver = mobile_driver_opening_and_closing
+    home_page = login_method(driver)
+    assert home_page.is_page_opened(), "[Home Page] Home Page is not opened after clicking No Thanks Button!"
+
+    gf_common_page = GFCommonPage(driver)
+    gf_common_page.get_bottom_nav_container().click_nav_container_button(NavContainerButton.PROFILE)
+
+    profile_page = ProfilePage(driver)
+    assert profile_page.is_page_opened(), "[Profile Page] Profile Page is not opened after clicking " \
+                                          "on Nav Container Button"
+    assert profile_page.is_switcher_checked(Switcher.SLEEP_SWITCH) is False, "[Profile Page] Sleep switcher is checked " \
+                                                                             "while it should not be!"
+    profile_page.switcher_check(Switcher.SLEEP_SWITCH)
+    assert profile_page.is_switcher_checked(
+        Switcher.SLEEP_SWITCH) is True, "[Profile Page] Sleep switcher is unchecked " \
+                                        "while it should be!"
+    sleep_switch_color = profile_page.get_color_of_switcher(Switcher.SLEEP_SWITCH)
+    assert sleep_switch_color == Color.BLUE.value, "[Profile Page] Color of {} is not blue! Actual color is {}" \
+        .format(Switcher.SLEEP_SWITCH, sleep_switch_color)
+
+    profile_page.switcher_uncheck(Switcher.SLEEP_SWITCH)
+    sleep_switch_color = profile_page.get_color_of_switcher(Switcher.SLEEP_SWITCH)
+    assert sleep_switch_color == Color.WHITE.value, "[Profile Page] Color of {} is not WHITE. Actual color is {}" \
+        .format(Switcher.SLEEP_SWITCH, sleep_switch_color)
+
+def test_ninth_task_fourth_point(mobile_driver_opening_and_closing):
+    driver = mobile_driver_opening_and_closing
+    home_page = login_method(driver)
+    assert home_page.is_page_opened(), "[Home Page] Home Page is not opened after clicking No Thanks Button!"
+
+    gf_common_page = GFCommonPage(driver)
+    gf_common_page.get_bottom_nav_container().click_nav_container_button(NavContainerButton.PROFILE)
+
+    profile_page = ProfilePage(driver)
+    assert profile_page.is_page_opened(), "[Profile Page] Profile Page is not opened after clicking " \
+                                          "on Nav Container Button"
+    profile_page.open_settings_page()
+    settings_page = SettingsPage(driver)
+    assert settings_page.is_page_opened(), "[Settings Page] Settings Page is not opened after clicking Settings Button!"
+    for val in SettingsTitle:
+        relevant_color = settings_page.color_of_title(val.value)
+        assert relevant_color == Color.BLUE.value, "[Settings Page] Color of element {} is not BLUE. " \
+                                             "Actual color is {}".format(val, relevant_color)
+
+
+def test_ninth_task_fifth_point(mobile_driver_opening_and_closing):
+    driver = mobile_driver_opening_and_closing
+    home_page = login_method(driver)
+    assert home_page.is_page_opened(), "[Home Page] Home Page is not opened after clicking No Thanks Button!"
+
+    home_page_account_image_color = home_page.get_color_of_account_image()
+
+    gf_common_page = GFCommonPage(driver)
+    gf_common_page.get_bottom_nav_container().click_nav_container_button(NavContainerButton.PROFILE)
+
+    profile_page = ProfilePage(driver)
+    assert profile_page.is_page_opened(), "[Profile Page] Profile Page is not opened after clicking " \
+                                          "on Nav Container Button"
+
+    profile_page_account_image_color = profile_page.get_color_of_account_image()
+
+    assert home_page_account_image_color == profile_page_account_image_color, "[Profile Page] Color of account image " \
+                                                                              "is {} on profile page, but {} " \
+                                                                              "on home page!"\
+        .format(profile_page_account_image_color, home_page_account_image_color)
+
+    gf_common_page.get_bottom_nav_container().click_nav_container_button(NavContainerButton.HOME)
+    home_page = HomePage(driver)
+    assert home_page.is_page_opened(), "[Home Page] Home Page is not opened after clicking on Nav Container Button!"
+
+    home_page_account_image_color = home_page.get_color_of_account_image()
+    assert home_page_account_image_color == profile_page_account_image_color, "[Home Page] Color of account image " \
+                                                                              "is {} on home page, but {} " \
+                                                                              "on profile page!" \
+        .format(home_page_account_image_color, profile_page_account_image_color)
 
 
 

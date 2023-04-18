@@ -4,6 +4,8 @@ from src.mobile.abstract.abstract_ui_object import AbstractUIObject
 
 import abc
 
+from src.mobile.mobileTesting.GoogleFit.enums.icons import Icons
+from src.mobile.mobileTesting.GoogleFit.enums.labels import Labels
 from src.mobile.mobileTesting.GoogleFit.enums.nav_container_buttons import NavContainerButton
 
 
