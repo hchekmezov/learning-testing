@@ -1,7 +1,7 @@
 import abc
 
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver import Remote
+from appium.webdriver import Remote
 
 
 class AbstractPage():
@@ -10,7 +10,7 @@ class AbstractPage():
     def __init__(self, driver:  Remote):
         # super().__init__()
         self.driver = driver
-        self.wait = WebDriverWait(self.driver, 300)
+        self.wait = WebDriverWait(self.driver, 30)
 
     @abc.abstractmethod
     def is_page_opened(self) -> bool:

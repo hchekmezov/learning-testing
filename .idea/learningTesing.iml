@@ -4,10 +4,10 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
       <excludeFolder url="file://$MODULE_DIR$/.pytest_cache/v" />
-      <excludeFolder url="file://$MODULE_DIR$/tests/.pytest_cache/v" />
-      <excludeFolder url="file://$MODULE_DIR$/tests/guiTest/.pytest_cache/v" />
-      <excludeFolder url="file://$MODULE_DIR$/tests/mobileTest/.pytest_cache/v" />
-      <excludeFolder url="file://$MODULE_DIR$/tests/mobileTest/MFP/.pytest_cache/v" />
+      <excludeFolder url="file://$MODULE_DIR$/tests_python/.pytest_cache/v" />
+      <excludeFolder url="file://$MODULE_DIR$/tests_python/guiTest/.pytest_cache/v" />
+      <excludeFolder url="file://$MODULE_DIR$/tests_python/mobileTest/.pytest_cache/v" />
+      <excludeFolder url="file://$MODULE_DIR$/tests_python/mobileTest/MFP/.pytest_cache/v" />
       <excludeFolder url="file://$MODULE_DIR$/resources" />
     </content>
     <orderEntry type="inheritedJdk" />

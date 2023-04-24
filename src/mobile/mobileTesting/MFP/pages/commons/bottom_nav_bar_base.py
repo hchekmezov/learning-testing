@@ -1,7 +1,6 @@
 import abc
 
-from selenium.webdriver.remote.webdriver import WebDriver
-from selenium.webdriver import Remote
+from appium.webdriver import Remote
 from src.mobile.abstract.abstract_ui_object import AbstractUIObject
 from src.mobile.mobileTesting.MFP.enums.bottom_nav_bar_item import BottomNavBarItem
 

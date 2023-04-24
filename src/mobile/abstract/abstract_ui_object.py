@@ -3,7 +3,7 @@ import abc
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from seleniumpagefactory.Pagefactory import PageFactory
-from selenium.webdriver import Remote
+from appium.webdriver import Remote
 
 from src.mobile.utils.constants import Constants
 

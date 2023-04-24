@@ -1,9 +1,9 @@
 from appium.webdriver.common.appiumby import AppiumBy
-from selenium.webdriver import Remote
 
 from src.mobile.mobileTesting.MFP.enums.bottom_nav_bar_item import BottomNavBarItem
-from src.mobile.mobileTesting.MFP.pages.android.mfp_common_page import MFPCommonPage
 from src.mobile.mobileTesting.MFP.pages.commons.dashboard_page_base import DashboardPageBase
+from src.mobile.mobileTesting.MFP.pages.commons.mfp_common_page_base import MFPCommonPageBase
+from src.mobile.utils.initialize_utils import init_page_or_uiobject
 from src.mobile.utils.mobile_utils import *
 from src.mobile.utils.direction import *
 from src.mobile.utils.operating_system import OS
@@ -21,8 +21,9 @@ class DashboardPage(DashboardPageBase):
                                                               "[@content-desc='Dashboard horizontal pager'])[2]")
     #     self.__weight_card = (AppiumBy.ACCESSIBILITY_ID, "Progress weight card")
     def is_page_opened(self) -> bool:
-        return self.driver.find_element(self.__user_avatar[0], self.__user_avatar[1]).is_displayed()  \
-            and not MFPCommonPage(self.driver).get_bottom_nav_bar().is_nav_bar_item_clickable(BottomNavBarItem.DASHBOARD)
+        return self.driver.find_element(*self.__user_avatar).is_displayed()  \
+            and not init_page_or_uiobject(self.driver, MFPCommonPageBase)\
+                .get_bottom_nav_bar().is_nav_bar_item_clickable(BottomNavBarItem.DASHBOARD)
 
     def click_track_steps_button(self):
         swipeUp(500, 2, self.driver, OS.ANDROID)

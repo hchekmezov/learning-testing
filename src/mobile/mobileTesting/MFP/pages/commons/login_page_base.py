@@ -1,12 +1,13 @@
 from src.mobile.abstract.abstract_page import AbstractPage
-from selenium.webdriver import Remote
+from appium.webdriver import Remote
+
 import abc
 
 
 class LoginPageBase(AbstractPage):
     __metaclass__ = abc.ABCMeta
 
-    def __init__(self, driver):
+    def __init__(self, driver: Remote):
         super().__init__(driver)
 
     @abc.abstractmethod

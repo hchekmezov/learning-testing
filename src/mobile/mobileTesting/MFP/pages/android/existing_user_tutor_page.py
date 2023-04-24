@@ -1,8 +1,11 @@
 from appium.webdriver.common.appiumby import AppiumBy
-from selenium.webdriver.remote.webdriver import WebDriver
-from selenium.webdriver import Remote
+from appium.webdriver import Remote
+
+from src.mobile.mobileTesting.MFP.pages.commons.dashboard_page_base import DashboardPageBase
 from src.mobile.mobileTesting.MFP.pages.commons.existing_user_tutor_page_base import ExistingUserTutorPageBase
 from selenium.webdriver.support import expected_conditions as EC
+
+from src.mobile.utils.initialize_utils import init_page_or_uiobject
 
 
 class ExistingUserTutorPage(ExistingUserTutorPageBase):
@@ -11,10 +14,11 @@ class ExistingUserTutorPage(ExistingUserTutorPageBase):
         self.__close_button = (AppiumBy.XPATH, "//android.view.View [@resource-id='buttonExistingUserTutorial']/android.widget.Button")
         self.__see_tutorial_button = (AppiumBy.XPATH, "//android.view.View[@resource-id='buttonSeeTutorial']")
 
-    def click_close_button(self):
-        self.driver.find_element(self.__close_button[0], self.__close_button[1]).click()
+    def click_close_button(self) -> DashboardPageBase:
+        self.driver.find_element(*self.__close_button).click()
+        return init_page_or_uiobject(self.driver, DashboardPageBase)
+
 
     def is_page_opened(self) -> bool:
-        return self.wait.until(
-            EC.presence_of_element_located((self.__close_button[0], self.__close_button[1]))) \
-            and self.driver.find_element(self.__see_tutorial_button[0], self.__see_tutorial_button[1]).is_displayed()
+        return self.wait.until(EC.presence_of_element_located(self.__close_button)) \
+            and self.driver.find_element(*self.__see_tutorial_button).is_displayed()

@@ -1,6 +1,6 @@
 import abc
 
-from selenium.webdriver import Remote
+from appium.webdriver import Remote
 from src.mobile.abstract.abstract_page import AbstractPage
 
 class StepsPageBase(AbstractPage):

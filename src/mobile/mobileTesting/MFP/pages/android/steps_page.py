@@ -6,7 +6,7 @@ import logging
 
 
 from src.mobile.mobileTesting.MFP.pages.commons.steps_page_base import StepsPageBase
-from selenium.webdriver import Remote
+from appium.webdriver import Remote
 
 
 logger = logging.getLogger(__name__)

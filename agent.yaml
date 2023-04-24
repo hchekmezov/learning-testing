@@ -8,6 +8,7 @@ reporting:
   notification:
     notify-on-each-failure: true
   run:
+    environment: mfp from local
     treat_skips_as_failures: false
-    display-name: Google Fit Python Testing
+    display-name: MFP Testing by Python
 #    build: 1.12.1.96-SNAPSHOT

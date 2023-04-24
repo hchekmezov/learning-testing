@@ -1,3 +1,4 @@
+from appium.webdriver.common.touch_action import TouchAction
 from pytest_zebrunner.zebrunner_logging import ZebrunnerHandler
 import logging
 
@@ -5,6 +6,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from src.mobile.utils.operating_system import OS
 from selenium.webdriver import Remote
+
+from pytest_zebrunner import attach_test_screenshot
 
 from src.mobile.utils.direction import Direction
 
@@ -65,6 +68,10 @@ class Point:
     def __str__(self):
         return f"(x = {self.x}, y = {self.y})"
 
+
+def attach_screenshot(driver: Remote):
+    driver.save_screenshot("screenshot.png")
+    attach_test_screenshot("screenshot.png")
 
 
 def isVisibleMethod(timeout, locator, driver) -> bool:
@@ -145,10 +152,10 @@ def swipeInContainer(container, direction, count, duration, driver, os: OS) -> b
 def swipeInContainerOneCount(container, direction: Direction, duration: int, driver, os: OS) -> bool:
     return swipeInContainer(container, direction, 1, duration, driver, os)
 
-def swipeWithCountAndDirection(locator, container, direction: Direction, count: int, driver, os: OS):
+def swipeWithCountAndDirection(locator, container, direction: Direction, count: int, driver, os: OS) -> bool:
     return swipe(locator, container, direction, count, 1000, driver, os)
 
-def swipeWithDirection(locator, container, direction: Direction, driver, os: OS):
+def swipeWithDirection(locator, container, direction: Direction, driver, os: OS) -> bool:
     return swipe(locator, container, direction, 50, 1000, driver, os)
 
 # locator -> (MobilyBy.///, "...")
@@ -269,11 +276,17 @@ def swipeLeftInContainerWithCount(container, duration: int, count: int, driver, 
         swipeLeftInContainer(container, duration, driver, os)
 
 
-def swipeToElementVertical(locator, driver: Remote, os: OS):
+def swipeToElementVertical(locator, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.VERTICAL, 50, 1000, driver, os)
 
-def swipeToElemenVerticaltWithCount(locator, count: int, driver: Remote, os: OS):
+def swipeToElemenVerticalWithCount(locator, count: int, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.VERTICAL, count, 1000, driver, os)
+
+def swipeToElementVerticalDownFirst(locator, driver: Remote, os: OS) -> bool:
+    return swipe(locator, None, Direction.VERTICAL_DOWN_FIRST, 50, 1000, driver, os)
+
+def swipeToElemenVerticalDownFirstWithCount(locator, count: int, driver: Remote, os: OS) -> bool:
+    return swipe(locator, None, Direction.VERTICAL_DOWN_FIRST, count, 1000, driver, os)
 
 def swipeToElementUp(locator, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.UP, 50, 1000, driver, os)
@@ -292,3 +305,10 @@ def swipeToElementDownWithCount(locator, count: int, driver: Remote, os: OS) -> 
 
 def swipeToElementDownWithDuration(locator, duration: int, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.DOWN, 50, duration, driver, os)
+
+
+
+def long_press_on_element(element, driver: Remote):
+    actions = TouchAction(driver)
+    actions.long_press(element, duration=2000)
+    actions.perform()
