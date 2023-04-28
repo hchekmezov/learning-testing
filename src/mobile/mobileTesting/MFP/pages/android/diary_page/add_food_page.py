@@ -1,5 +1,6 @@
 from appium.webdriver import Remote, WebElement
 from appium.webdriver.common.appiumby import AppiumBy
+from selenium.webdriver.support.wait import WebDriverWait
 
 from src.mobile.mobileTesting.MFP.enums.meals_names import MealName
 from src.mobile.mobileTesting.MFP.pages.commons.diary_page.add_food_page_base import AddFoodPageBase
@@ -17,8 +18,8 @@ class AddFoodPage(AddFoodPageBase):
                                               "//preceding-sibling::android.widget.ImageButton")
 
     def is_page_opened(self) -> bool:
-        return self.wait.until(EC.visibility_of_element_located(self.__selected_meal)) and \
-            self.wait.until(EC.visibility_of_element_located(self.__search_bar))
+        return WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.__selected_meal)) and \
+            WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.__search_bar))
 
     def is_needed_page_opened_by_meal_name(self, meal_name: MealName) -> bool:
         return meal_name.value == self.driver.find_element(*self.__title).text
@@ -32,13 +33,13 @@ class AddFoodPage(AddFoodPageBase):
     def find_and_add_meal(self, meal: str):
         search_edit: WebElement = self.driver.find_element(*self.__search_edit_text_field)
         search_edit.send_keys(meal)
-        self.wait.until(EC.visibility_of_element_located((AppiumBy.XPATH, "//*[@resource-id='com.myfitnesspal.android:id/recyclerSearchFoodList']"
+        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located((AppiumBy.XPATH, "//*[@resource-id='com.myfitnesspal.android:id/recyclerSearchFoodList']"
                                                  "/android.view.ViewGroup[2]")))
 
         self.driver.find_element(AppiumBy.XPATH, "//*[@resource-id='com.myfitnesspal.android:id/recyclerSearchFoodList']"
                                                  "/android.view.ViewGroup[2]").click()
         self.driver.hide_keyboard()
-        self.wait.until(EC.visibility_of_all_elements_located((AppiumBy.ID,
+        WebDriverWait(self.driver, 30).until(EC.visibility_of_all_elements_located((AppiumBy.ID,
                                                                "com.myfitnesspal.android:id/onlineSearchStatus")))
         self.driver.find_element(AppiumBy.XPATH, "//*[@resource-id='com.myfitnesspal.android:id/itemWithHeaderContainer']"
                                                  "[1]//android.widget.ImageView").click()

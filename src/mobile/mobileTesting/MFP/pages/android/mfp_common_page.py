@@ -1,6 +1,7 @@
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support import expected_conditions as EC
 from appium.webdriver import Remote
+from selenium.webdriver.support.wait import WebDriverWait
 
 from src.mobile.mobileTesting.MFP.pages.commons.bottom_nav_bar_base import BottomNavBarBase
 from src.mobile.mobileTesting.MFP.pages.commons.mfp_common_page_base import MFPCommonPageBase
@@ -21,7 +22,7 @@ class MFPCommonPage(MFPCommonPageBase):
 
     def wait_until_spinner_rounding(self):
         # self.wait = WebDriverWait(self.driver, Constants.THIRTY_SECONDS.value)
-        return self.wait.until(EC.invisibility_of_element_located((AppiumBy.ID, "com.myfitnesspal.android:id/progressPleaseWait")))
+        return WebDriverWait(self.driver, 30).until(EC.invisibility_of_element_located((AppiumBy.ID, "com.myfitnesspal.android:id/progressPleaseWait")))
 
     def get_bottom_nav_bar(self):
         return init_page_or_uiobject(self.driver, BottomNavBarBase)

@@ -21,6 +21,6 @@ class PreviewPage(PreviewPageBase):
         return init_page_or_uiobject(self.driver, LoginPageBase)
 
     def is_page_opened(self) -> bool:
-        self.wait = WebDriverWait(self.driver, Constants.TEN_SECONDS.value)
-        return self.wait.until(EC.visibility_of_element_located(self.__logo)) \
+        return WebDriverWait(self.driver, Constants.TEN_SECONDS.value)\
+            .until(EC.visibility_of_element_located(self.__logo)) \
             and self.driver.find_element(*self.__login_button).is_displayed()

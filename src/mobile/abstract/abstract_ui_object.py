@@ -13,7 +13,7 @@ class AbstractUIObject():
 
     def __init__(self, driver:  Remote):
         self.driver = driver
-        self.wait = WebDriverWait(self.driver, 300)
+        # self.wait = WebDriverWait(self.driver, 300)
 
     @abc.abstractmethod
     def is_present(self) -> bool: # is_ui_object_present

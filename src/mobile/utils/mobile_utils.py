@@ -279,13 +279,13 @@ def swipeLeftInContainerWithCount(container, duration: int, count: int, driver, 
 def swipeToElementVertical(locator, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.VERTICAL, 50, 1000, driver, os)
 
-def swipeToElemenVerticalWithCount(locator, count: int, driver: Remote, os: OS) -> bool:
+def swipeToElementVerticalWithCount(locator, count: int, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.VERTICAL, count, 1000, driver, os)
 
-def swipeToElementVerticalDownFirst(locator, driver: Remote, os: OS) -> bool:
+def swipeToElementtVerticalDownFirst(locator, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.VERTICAL_DOWN_FIRST, 50, 1000, driver, os)
 
-def swipeToElemenVerticalDownFirstWithCount(locator, count: int, driver: Remote, os: OS) -> bool:
+def swipeToElementVerticalDownFirstWithCount(locator, count: int, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.VERTICAL_DOWN_FIRST, count, 1000, driver, os)
 
 def swipeToElementUp(locator, driver: Remote, os: OS) -> bool:

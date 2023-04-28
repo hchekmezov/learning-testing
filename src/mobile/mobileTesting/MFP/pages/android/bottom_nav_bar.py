@@ -6,7 +6,7 @@ from typing import Union
 
 from src.mobile.mobileTesting.MFP.pages.commons.dashboard_page_base import DashboardPageBase
 from src.mobile.mobileTesting.MFP.pages.commons.diary_page.diary_page_base import DiaryPageBase
-from src.mobile.mobileTesting.MFP.pages.commons.more_page_base import MorePageBase
+from src.mobile.mobileTesting.MFP.pages.commons.more_page.more_page_base import MorePageBase
 from src.mobile.mobileTesting.MFP.pages.commons.newsfeed_page_base import NewsfeedPageBase
 from src.mobile.mobileTesting.MFP.pages.commons.plans_page_base import PlansPageBase
 from src.mobile.utils.initialize_utils import init_page_or_uiobject
@@ -46,4 +46,4 @@ class BottomNavBar(BottomNavBarBase):
 
     def is_present(self) -> bool:
         # return self.driver.find_element(*self.__nav_bar_view_group).is_displayed()
-        return self.wait.until(EC.visibility_of_element_located(self.__nav_bar_view_group))
+        return WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.__nav_bar_view_group))

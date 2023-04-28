@@ -1,5 +1,6 @@
 from appium.webdriver.common.appiumby import AppiumBy
 from appium.webdriver import Remote
+from selenium.webdriver.support.wait import WebDriverWait
 
 from src.mobile.mobileTesting.MFP.pages.commons.dashboard_page_base import DashboardPageBase
 from src.mobile.mobileTesting.MFP.pages.commons.existing_user_tutor_page_base import ExistingUserTutorPageBase
@@ -20,5 +21,5 @@ class ExistingUserTutorPage(ExistingUserTutorPageBase):
 
 
     def is_page_opened(self) -> bool:
-        return self.wait.until(EC.presence_of_element_located(self.__close_button)) \
+        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located(self.__close_button)) \
             and self.driver.find_element(*self.__see_tutorial_button).is_displayed()

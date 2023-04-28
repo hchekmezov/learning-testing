@@ -14,14 +14,14 @@ class DashboardPage(DashboardPageBase):
 
     def __init__(self, driver: Remote):
         super().__init__(driver)
-        self.__user_avatar = (AppiumBy.XPATH, "//android.view.View[@content-desc='User avatar']")
+        self.__user_avatar = (AppiumBy.ACCESSIBILITY_ID, "User avatar")
         self.__track_steps_button = (AppiumBy.XPATH, "//android.view.View[@content-desc='Progress steps card']"
                                                           "/android.view.View/android.widget.Button")
         self.__bottom_horizontal_container = (AppiumBy.XPATH, "(//android.view.View"
                                                               "[@content-desc='Dashboard horizontal pager'])[2]")
     #     self.__weight_card = (AppiumBy.ACCESSIBILITY_ID, "Progress weight card")
     def is_page_opened(self) -> bool:
-        return self.driver.find_element(*self.__user_avatar).is_displayed()  \
+        return WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.__user_avatar))  \
             and not init_page_or_uiobject(self.driver, MFPCommonPageBase)\
                 .get_bottom_nav_bar().is_nav_bar_item_clickable(BottomNavBarItem.DASHBOARD)
 

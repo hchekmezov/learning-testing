@@ -14,5 +14,5 @@ class NutritionPage(NutritionPageBase):
         self.__mini_food_container = (AppiumBy.ID, "com.myfitnesspal.android:id/mini_food_list_container")
 
     def is_page_opened(self) -> bool:
-        return self.wait.until(EC.visibility_of_element_located(self.__title)) \
+        return WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(self.__title)) \
             and self.driver.find_element(*self.__mini_food_container).is_displayed()
