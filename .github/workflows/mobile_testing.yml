@@ -38,4 +38,4 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
           api-level: 29
-          script: python -m pytest -s -v tests_python/mobileTest/MFP/${{ github.event.inputs.test }}.py --email ${{ secrets.TEST_EMAIL }} --password ${{ secrets.TEST_PASSWORD }}
+          script: python -m pytest -s -v tests_python/mobileTest/MFP/${{ github.event.inputs.test || 'test_mobile_mfp' }}.py --email ${{ secrets.TEST_EMAIL }} --password ${{ secrets.TEST_PASSWORD }}
