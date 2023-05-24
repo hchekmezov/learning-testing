@@ -33,23 +33,16 @@ class AddFoodPage(AddFoodPageBase):
     def find_and_add_meal(self, meal: str):
         search_edit: WebElement = self.driver.find_element(*self.__search_edit_text_field)
         search_edit.send_keys(meal)
-        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located((AppiumBy.XPATH, "//*[@resource-id='com.myfitnesspal.android:id/recyclerSearchFoodList']"
-                                                 "/android.view.ViewGroup[2]")))
+        WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located((AppiumBy.XPATH,
+                                 "//*[@resource-id='com.myfitnesspal.android:id/recyclerSearchFoodList']"
+                                 "/android.view.ViewGroup[2]")))
 
-        self.driver.find_element(AppiumBy.XPATH, "//*[@resource-id='com.myfitnesspal.android:id/recyclerSearchFoodList']"
-                                                 "/android.view.ViewGroup[2]").click()
+        self.driver.find_element(AppiumBy.XPATH,
+                                 "//*[@resource-id='com.myfitnesspal.android:id/recyclerSearchFoodList']"
+                                 "/android.view.ViewGroup[2]").click()
         self.driver.hide_keyboard()
         WebDriverWait(self.driver, 30).until(EC.visibility_of_all_elements_located((AppiumBy.ID,
                                                                "com.myfitnesspal.android:id/onlineSearchStatus")))
-        self.driver.find_element(AppiumBy.XPATH, "//*[@resource-id='com.myfitnesspal.android:id/itemWithHeaderContainer']"
-                                                 "[1]//android.widget.ImageView").click()
-
-
-
-
-
-
-
-
-
-
+        self.driver.find_element(AppiumBy.XPATH,
+                                 "//*[@resource-id='com.myfitnesspal.android:id/itemWithHeaderContainer']"
+                                 "[1]//android.widget.ImageView").click()

@@ -1,5 +1,3 @@
-import time
-
 import pytest
 
 from src.common_utils.soft_assert import SoftAssert
@@ -7,15 +5,16 @@ from src.mobile.mobileTesting.MFP.enums.bottom_nav_bar_item import BottomNavBarI
 from src.mobile.mobileTesting.MFP.enums.custom_summary_item import CustomSummaryItem
 from src.mobile.mobileTesting.MFP.enums.diary_activity_items import DiaryActivityItem
 from src.mobile.mobileTesting.MFP.enums.meals_names import MealName
-from src.mobile.mobileTesting.MFP.enums.more_menu_options import MoreMenuOption
+from src.mobile.mobileTesting.MFP.enums.more_page.more_menu_options import MoreMenuOption
 from src.mobile.mobileTesting.MFP.enums.my_prem_tools_items import MyPremToolsItem
 from src.mobile.mobileTesting.MFP.pages.commons.diary_page.add_food_page_base import AddFoodPageBase
-from src.mobile.mobileTesting.MFP.pages.commons.dashboard_page_base import DashboardPageBase
+from src.mobile.mobileTesting.MFP.pages.commons.dashboard_page.dashboard_page_base import DashboardPageBase
 from src.mobile.mobileTesting.MFP.pages.commons.diary_page.diary_page_base import DiaryPageBase
 from src.mobile.mobileTesting.MFP.pages.commons.existing_user_tutor_page_base import ExistingUserTutorPageBase
 from src.mobile.mobileTesting.MFP.pages.commons.login_page_base import LoginPageBase
 from src.mobile.mobileTesting.MFP.pages.commons.mfp_common_page_base import MFPCommonPageBase
 from src.mobile.mobileTesting.MFP.pages.commons.preview_page_base import PreviewPageBase
+from src.mobile.mobileTesting.MFP.pages.commons.steps_page_base import StepsPageBase
 from src.mobile.utils.constants import Constants
 from src.mobile.utils.initialize_utils import init_page_or_uiobject
 from src.mobile.utils.mobile_utils import *
@@ -37,7 +36,8 @@ def test_mfp_first(mobile_driver_opening_and_closing):
     assert login_page.is_page_opened(), "[Login Page] Login Page is not opened after clicking Log In Button!"
     # login_page.type_email_and_password(configs.get("email").data, configs.get("password").data)
     login_page.type_email_and_password(Constants.EMAIL.value, Constants.PASSWORD.value)
-    assert login_page.is_login_button_enabled(), "[Login Page] Log In Button should be enabled after typing email and password!"
+    assert login_page.is_login_button_enabled(), \
+        "[Login Page] Log In Button should be enabled after typing email and password!"
     login_page.click_login_button()
     assert mfp_common_page.wait_until_spinner_rounding(), \
         "[Progress Spinner] Progress Spinner rouding too long after clicking Log In Button!"
@@ -58,7 +58,8 @@ def test_mfp_second(mobile_driver_opening_and_closing):
     login_page = init_page_or_uiobject(driver, LoginPageBase)
     assert login_page.is_page_opened(), "[Login Page] Login Page is not opened after clicking Log In Button!"
     login_page.type_email_and_password(Constants.EMAIL.value, Constants.PASSWORD.value)
-    assert login_page.is_login_button_enabled(), "[Login Page] Log In Button should be enabled after typing email and password!"
+    assert login_page.is_login_button_enabled(), \
+        "[Login Page] Log In Button should be enabled after typing email and password!"
     login_page.click_login_button()
     assert mfp_common_page.wait_until_spinner_rounding(), \
         "[Progress Spinner] Progress Spinner rouding too long after clicking Log In Button!"
@@ -82,7 +83,8 @@ def login_to_dashboard(driver) -> DashboardPageBase:
     login_page_base = preview_page_base.click_login_button()
     assert login_page_base.is_page_opened(), "[Login Page] Login Page is not opened after clicking Log In Button!"
     login_page_base.type_email_and_password(Constants.EMAIL.value, Constants.PASSWORD.value)
-    assert login_page_base.is_login_button_enabled(), "[Login Page] Log In Button should be enabled after typing email and password!"
+    assert login_page_base.is_login_button_enabled(), \
+        "[Login Page] Log In Button should be enabled after typing email and password!"
     existing_user_tutor_page_base = login_page_base.click_login_button()
     if existing_user_tutor_page_base.is_page_opened():
         return existing_user_tutor_page_base.click_close_button()
@@ -231,9 +233,10 @@ def test_case_five(mobile_driver_opening_and_closing):
     # SOFT ASSERT
     soft_assert = SoftAssert()
     for nutrient in nutrients:
-        soft_assert.assertExperession(custom_summary_page_base.is_nutrient_checked(nutrient),
-                                          "[Custom Summary Page] Nutrient {} is not checked!".format(nutrient.get_title()))
-    soft_assert.assertAll()
+        soft_assert.assert_expression(custom_summary_page_base.is_nutrient_checked(nutrient),
+                                          "[Custom Summary Page] Nutrient {} is not checked!"
+                                      .format(nutrient.get_title()))
+    soft_assert.assert_all()
 
 
 def test_case_six(mobile_driver_opening_and_closing):
@@ -297,10 +300,10 @@ def test_case_seven(mobile_driver_opening_and_closing):
     soft_assert = SoftAssert()
     lst_of_options = list(MoreMenuOption.__members__.values())
     for option in lst_of_options:
-        soft_assert.assertExperession(more_page_base.is_option_present(option),
+        soft_assert.assert_expression(more_page_base.is_option_present(option),
                                           "[More Page] Option {} is not present!".format(option.value))
 
-    soft_assert.assertAll()
+    soft_assert.assert_all()
 
 
 def test_case_eight(mobile_driver_opening_and_closing):
@@ -323,23 +326,7 @@ def test_case_eight(mobile_driver_opening_and_closing):
     soft_assert = SoftAssert()
     lst_of_tools_items = list(MyPremToolsItem.__members__.values())
     for item in lst_of_tools_items:
-        soft_assert.assertExperession(my_prem_tools_page_base.is_option_and_description_displayed(item),
+        soft_assert.assert_expression(my_prem_tools_page_base.is_option_and_description_displayed(item),
                                       "[My Premium Tools Page] Item {} is not displayed!".format(item))
 
-    soft_assert.assertAll()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    soft_assert.assert_all()

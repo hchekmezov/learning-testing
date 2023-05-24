@@ -3,7 +3,6 @@ import abc
 from appium.webdriver import Remote
 
 from src.mobile.abstract.abstract_page import AbstractPage
-from src.mobile.mobileTesting.MFP.pages.android.diary_page.quick_add_page import QuickAddPage
 from src.mobile.mobileTesting.MFP.pages.commons.diary_page.quick_add_page_base import QuickAddPageBase
 
 

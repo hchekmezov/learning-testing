@@ -1,5 +1,3 @@
-import abc
-
 from appium.webdriver import Remote
 
 from src.mobile.abstract.abstract_page import AbstractPage

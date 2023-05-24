@@ -1,8 +1,7 @@
 from enum import Enum
-from deprecated import deprecated
 import warnings
 
-# @deprecated(reason="Maybe not needed to use in python case")
+
 def device_type(page_type, parent_class):
     def decorator(cls):
         cls.page_type = page_type
@@ -12,7 +11,7 @@ def device_type(page_type, parent_class):
     warnings.warn("device_type is deprecated. Maybe don't need to use in python!", DeprecationWarning, stacklevel=2)
     return decorator
 
-# @deprecated(reason="Maybe not needed to use in python case")
+
 class DeviceType(Enum):
     DESKTOP = ("desktop", "desktop")
     ANDROID_TABLET = ("android_tablet", "android")
@@ -22,12 +21,8 @@ class DeviceType(Enum):
     IOS_PHONE = ("ios_phone", "ios")
     APPLE_TV = ("apple_tv", "tvos")
 
-    # warnings.warn("DeviceType is deprecated. Maybe don't need to use in python!", DeprecationWarning, stacklevel=2)
-
     def get_type(self):
         return self.value[0]
 
     def get_family(self):
         return self.value[1]
-
-

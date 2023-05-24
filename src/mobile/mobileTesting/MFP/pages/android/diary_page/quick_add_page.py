@@ -35,8 +35,3 @@ class QuickAddPage(QuickAddPageBase):
 
     def is_calories_equals_value(self, value: int) -> bool:
         return int(self.driver.find_element(*self.__calories_field).text) == value
-
-
-
-
-

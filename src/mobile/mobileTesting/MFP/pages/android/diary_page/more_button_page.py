@@ -2,7 +2,6 @@ from appium.webdriver import Remote
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.wait import WebDriverWait
 
-from src.mobile.mobileTesting.MFP.pages.android.diary_page.quick_add_page import QuickAddPage
 from src.mobile.mobileTesting.MFP.pages.commons.diary_page.more_button_page_base import MoreButtonPageBase
 from src.mobile.mobileTesting.MFP.pages.commons.diary_page.quick_add_page_base import QuickAddPageBase
 from src.mobile.utils.initialize_utils import init_page_or_uiobject

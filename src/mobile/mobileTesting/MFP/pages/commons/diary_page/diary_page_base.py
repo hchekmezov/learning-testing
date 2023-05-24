@@ -42,6 +42,10 @@ class DiaryPageBase(AbstractPage):
         return
 
     @abc.abstractmethod
+    def is_workout_logged(self) -> bool:
+        return
+
+    @abc.abstractmethod
     def get_calories_goal_int_value(self) -> int:
         return
 
@@ -56,4 +60,3 @@ class DiaryPageBase(AbstractPage):
     @abc.abstractmethod
     def click_summary_more_button(self) -> CustomDashboardPageBase:
         return
-

@@ -64,11 +64,3 @@ class CustomSummaryPage(CustomSummaryPageBase):
         # self.driver.implicitly_wait(2)
         swipeToElementVerticalWithCount(self.__nutrient_selected_text, 7, self.driver, OS.ANDROID)
         return self.driver.find_element(*self.__nutrient_selected_text).text
-
-
-
-
-
-
-
-

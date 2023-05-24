@@ -2,7 +2,7 @@ from appium.webdriver import Remote
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.wait import WebDriverWait
 
-from src.mobile.mobileTesting.MFP.enums.more_menu_options import MoreMenuOption
+from src.mobile.mobileTesting.MFP.enums.more_page.more_menu_options import MoreMenuOption
 from src.mobile.mobileTesting.MFP.enums.my_prem_tools_items import MyPremToolsItem
 from src.mobile.mobileTesting.MFP.pages.commons.more_page.my_premium_tools_page_base import MyPremiumToolsPageBase
 from src.mobile.utils.mobile_utils import EC, swipeToElementVerticalWithCount
@@ -26,6 +26,3 @@ class MyPremiumToolsPage(MyPremiumToolsPageBase):
                                     "/*[@resource-id='com.myfitnesspal.android:id/tv_header' and @text='{}']/.."
                                     .format(option.get_desc_text(), option.get_header_text()))
         return swipeToElementVerticalWithCount(self.__needed_view_group, 10, self.driver, OS.ANDROID)
-
-
-

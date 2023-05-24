@@ -1,4 +1,3 @@
-from selenium.webdriver.remote.webdriver import WebDriver
 from appium.webdriver import Remote
 from src.mobile.abstract.abstract_page import AbstractPage
 import abc

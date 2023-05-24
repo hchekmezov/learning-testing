@@ -1,6 +1,7 @@
 from enum import Enum
 
 from src.mobile.mobileTesting.MFP.pages.commons.more_page.my_premium_tools_page_base import MyPremiumToolsPageBase
+from src.mobile.mobileTesting.MFP.pages.commons.more_page.settings_page_base import SettingsPageBase
 
 
 class MoreMenuOption(Enum):
@@ -19,7 +20,7 @@ class MoreMenuOption(Enum):
     FRIENDS = ('Friends', None)
     MESSAGES = ('Messages', None)
     PRIVACY_CENTER = ('Privacy Center', None)
-    SETTINGS = ('Settings', None)
+    SETTINGS = ('Settings', SettingsPageBase)
     HELP = ('Help', None)
     SYNC = ('Sync', None)
 

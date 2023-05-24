@@ -3,7 +3,7 @@ import abc
 from appium.webdriver import Remote
 
 from src.mobile.abstract.abstract_page import AbstractPage
-from src.mobile.mobileTesting.MFP.enums.more_menu_options import MoreMenuOption
+from src.mobile.mobileTesting.MFP.enums.more_page.more_menu_options import MoreMenuOption
 
 
 class MorePageBase(AbstractPage):

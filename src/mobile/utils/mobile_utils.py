@@ -36,9 +36,6 @@ class Dimension():
     def __str__(self) -> str:
         return "(width = {width}, height = {height})".format(width=self.__width, height=self.__height)
 
-    # def __repr__(self) -> str:
-    #     return super().__repr__()
-
     def __hash__(self) -> int:
         return super().__hash__()
 
@@ -82,7 +79,7 @@ def isVisibleMethod(timeout, locator, driver) -> bool:
         logger.debug(f"wait.until: {e}")
     return bool(res)
 
-#                    element  ,    direction
+
 def swipeInContainer(container, direction, count, duration, driver, os: OS) -> bool:
         """**container** should be transferred like: *driver.find_element(container[0], container[1])*
         or
@@ -139,39 +136,34 @@ def swipeInContainer(container, direction, count, duration, driver, os: OS) -> b
         else:
                 raise Exception('Unsupported operation')
 
-        logger.debug("Swipe from (X = {startx}; Y = {starty}) to (X = {endx}; Y = {endy})".format(startx=startx, starty=starty, endx=endx, endy=endy))
+        logger.debug("Swipe from (X = {startx}; Y = {starty}) to (X = {endx}; Y = {endy})"
+                     .format(startx=startx, starty=starty, endx=endx, endy=endy))
 
         try:
             for i in range (0, count):
                 driver.swipe(start_x=startx, start_y=starty, end_x=endx, end_y=endy, duration=duration)
             return True
         except Exception as e:
-            logger.error("Error during Swipe from (X = {startx}; Y = {starty}) to (X = {endx}; Y = {endy}): {e}".format(startx=startx, starty=starty, endx=endx, endy=endy, e=e))
+            logger.error("Error during Swipe from (X = {startx}; Y = {starty}) to (X = {endx}; Y = {endy}): {e}"
+                         .format(startx=startx, starty=starty, endx=endx, endy=endy, e=e))
             return False
+
 
 def swipeInContainerOneCount(container, direction: Direction, duration: int, driver, os: OS) -> bool:
     return swipeInContainer(container, direction, 1, duration, driver, os)
 
+
 def swipeWithCountAndDirection(locator, container, direction: Direction, count: int, driver, os: OS) -> bool:
     return swipe(locator, container, direction, count, 1000, driver, os)
+
 
 def swipeWithDirection(locator, container, direction: Direction, driver, os: OS) -> bool:
     return swipe(locator, container, direction, 50, 1000, driver, os)
 
-# locator -> (MobilyBy.///, "...")
+
 def swipe(locator, container, direction: Direction, count: int, duration: int, driver, os: OS) -> bool:
-        # try:
-        #     element =  driver.find_element(locator[0], locator[1])
-        #     isVisible = True
-        # except:
-        #     isVisible = False
 
         isVisible = isVisibleMethod(timeout=1, locator=locator, driver=driver)
-
-        # if isinstance(isVisible, WebElement):
-        #    isVisible = True
-        # else:
-        #     isVisible = False
 
         if isVisible:
             element = driver.find_element(locator[0], locator[1])
@@ -212,7 +204,8 @@ def swipe(locator, container, direction: Direction, count: int, duration: int, d
             while currentCount > 0 and not isVisible:
                 logger.debug(
                     f"Element not present! Swipe {direction} will be executed to element")
-                swipeInContainerOneCount(container=container, direction=direction, duration=duration, driver=driver, os=os)
+                swipeInContainerOneCount(container=container, direction=direction, duration=duration, driver=driver,
+                                         os=os)
                 logger.info(f"Swipe was executed. Attempts remain: {currentCount}")
                 isVisible = isVisibleMethod(timeout=1, locator=locator, driver=driver)
                 # try:
@@ -232,7 +225,8 @@ def swipe(locator, container, direction: Direction, count: int, duration: int, d
             while bothDirections and not isVisible and currentCount > 0:
                 logger.debug(
                     f"Element not present! Swipe {oppositeDirection} will be executed to element")
-                swipeInContainerOneCount(container=container, direction=oppositeDirection, duration=duration, driver=driver, os=os)
+                swipeInContainerOneCount(container=container, direction=oppositeDirection,
+                                         duration=duration, driver=driver, os=os)
                 isVisible = isVisibleMethod(timeout=1, driver=driver, locator=locator)
                 # try:
                 #     element = driver.find_element(locator[0], locator[1])
@@ -267,6 +261,7 @@ def swipeLeft(duration: int , times: int, driver, os: OS):
     for i in range(times):
         swipeLeftOneCount(duration, driver, os)
 
+
 def swipeLeftInContainer(container, duration: int, driver, os: OS):
     swipeInContainerOneCount(container, Direction.LEFT, duration, driver, os)
 
@@ -279,33 +274,49 @@ def swipeLeftInContainerWithCount(container, duration: int, count: int, driver, 
 def swipeToElementVertical(locator, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.VERTICAL, 50, 1000, driver, os)
 
+
 def swipeToElementVerticalWithCount(locator, count: int, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.VERTICAL, count, 1000, driver, os)
+
+
+def swipeToElementVerticalWithCountAndDuration(locator, count: int, duration: int, driver: Remote, os: OS):
+    return swipe(locator, None, Direction.VERTICAL, count, duration, driver, os)
+
 
 def swipeToElementtVerticalDownFirst(locator, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.VERTICAL_DOWN_FIRST, 50, 1000, driver, os)
 
+
 def swipeToElementVerticalDownFirstWithCount(locator, count: int, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.VERTICAL_DOWN_FIRST, count, 1000, driver, os)
+
+
+def swipeToElementVerticalDownFirstWithCountAndDuration(locator, count: int, duration: int, driver: Remote, os: OS):
+    return swipe(locator, None, Direction.VERTICAL_DOWN_FIRST, count, duration, driver, os)
+
 
 def swipeToElementUp(locator, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.UP, 50, 1000, driver, os)
 
+
 def swipeToElementUpWithCount(locator, count: int, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.UP, count, 1000, driver, os)
+
 
 def swipeToElementUpWithDuration(locator, duration: int, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.UP, 50, duration, driver, os)
 
+
 def swipeToElementDown(locator, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.DOWN, 50, 1000, driver, os)
+
 
 def swipeToElementDownWithCount(locator, count: int, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.DOWN, count, 1000, driver, os)
 
+
 def swipeToElementDownWithDuration(locator, duration: int, driver: Remote, os: OS) -> bool:
     return swipe(locator, None, Direction.DOWN, 50, duration, driver, os)
-
 
 
 def long_press_on_element(element, driver: Remote):

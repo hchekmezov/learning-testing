@@ -27,5 +27,3 @@ class EditDiaryPage(EditDiaryPageBase):
         assert WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.__delete_panel)), \
             "[Edit Diary Page] Delete Panel is not present after clicking trash bin button!"
         self.driver.find_element(*self.__delete_on_delete_panel).click()
-
-

@@ -1,6 +1,5 @@
 from appium.webdriver import WebElement
 from appium.webdriver.common.appiumby import AppiumBy
-from selenium.common import NoSuchElementException
 
 from src.mobile.mobileTesting.MFP.enums.bottom_nav_bar_item import BottomNavBarItem
 from src.mobile.mobileTesting.MFP.enums.diary_activity_items import DiaryActivityItem
@@ -38,6 +37,15 @@ class DiaryPage(DiaryPageBase):
             and not init_page_or_uiobject(self.driver, MFPCommonPageBase) \
                 .get_bottom_nav_bar().is_nav_bar_item_clickable(BottomNavBarItem.DIARY)
 
+    def is_workout_logged(self) -> bool:
+        locator = (AppiumBy.XPATH, "//*[@resource-id='com.myfitnesspal.android:id/content_container']"
+                                   "//*[@text='Exercise']/../.."
+                                   "//following-sibling::android.widget.LinearLayout"
+                                   "[@resource-id='com.myfitnesspal.android:id/foodSearchViewFoodItem']"
+                                   "//*[@resource-id='com.myfitnesspal.android:id/txtItemDescription' "
+                                   "and contains(@text, 'Workout')]")
+        return swipeToElementVerticalWithCountAndDuration(locator, 10, 700, self.driver, OS.ANDROID)
+
     def open_nutrition_page(self) -> NutritionPageBase:
         swipeToElementUp(self.__nutrition_button, self.driver, OS.ANDROID)
         self.driver.find_element(*self.__nutrition_button).click()
@@ -48,14 +56,12 @@ class DiaryPage(DiaryPageBase):
                                              "following-sibling::android.widget.LinearLayout"
                                              "//android.widget.Button[1])[1]".format(item.value))
         swipeToElementVertical(self.__add_button, self.driver, OS.ANDROID)
-        # swipeUp(7000, 1, self.driver, OS.ANDROID)
         self.driver.find_element(*self.__add_button).click()
 
     def click_more_button_on_activity(self, item: DiaryActivityItem) -> MoreButtonPageBase:
         self.__more_button = (AppiumBy.XPATH, "(//*[@text='{}']/../..//following-sibling::android.widget.LinearLayout"
                                              "//android.widget.Button[2])[1]".format(item.value))
         swipeToElementVertical(self.__more_button, self.driver, OS.ANDROID)
-        # swipeUp(7000, 1, self.driver, OS.ANDROID)
         self.driver.find_element(*self.__more_button).click()
         return init_page_or_uiobject(self.driver, MoreButtonPageBase)
 
@@ -77,7 +83,6 @@ class DiaryPage(DiaryPageBase):
         WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(tmp_items))
 
         elements_for_deleting: list[WebElement] = self.driver.find_elements(*tmp_items)
-        # logger.info(elements_for_deleting)
 
         for element in elements_for_deleting:
             long_press_on_element(element, self.driver)
@@ -124,14 +129,3 @@ class DiaryPage(DiaryPageBase):
     def click_summary_more_button(self) -> CustomDashboardPageBase:
         self.driver.find_element(*self.__summary_more_button).click()
         return init_page_or_uiobject(self.driver, CustomDashboardPageBase)
-
-
-
-
-
-
-
-
-
-
-

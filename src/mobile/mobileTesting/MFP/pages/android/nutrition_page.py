@@ -1,4 +1,3 @@
-from appium.webdriver import Remote
 from appium.webdriver.common.appiumby import AppiumBy
 
 from src.mobile.mobileTesting.MFP.pages.commons.nutrition_page_base import NutritionPageBase

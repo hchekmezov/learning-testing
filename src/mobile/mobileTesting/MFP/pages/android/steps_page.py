@@ -1,4 +1,3 @@
-# //android.view.ViewGroup/android.widget.TextView
 from appium.webdriver.common.appiumby import AppiumBy
 
 from pytest_zebrunner.zebrunner_logging import ZebrunnerHandler
@@ -30,7 +29,3 @@ class StepsPage(StepsPageBase):
 
     def is_progress_spinner_rounding_present(self):
         return self.driver.find_element(self.__progress_bar[0], self.__progress_bar[1]).is_displayed()
-
-
-
-
