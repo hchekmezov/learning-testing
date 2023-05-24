@@ -30,11 +30,11 @@ logger.addHandler(ZebrunnerHandler())
 logger.setLevel(logging.INFO)
 
 
-def test_case_nine(mobile_driver_opening_and_closing):
+def test_case_nine(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -46,11 +46,12 @@ def test_case_nine(mobile_driver_opening_and_closing):
     assert plans_page_base.is_all_filter_by_buttons_present(), "[Plans Page] Not all buttons present!"
     assert plans_page_base.is_all_texts_and_survey_link_present(), "[Plans Page] Not all texts or survey link present!"
 
-def test_case_ten(mobile_driver_opening_and_closing):
+
+def test_case_ten(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -66,11 +67,11 @@ def test_case_ten(mobile_driver_opening_and_closing):
     soft_assert.assert_all()
 
 
-def test_case_eleven(mobile_driver_opening_and_closing):
+def test_case_eleven(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -126,11 +127,11 @@ def test_case_eleven(mobile_driver_opening_and_closing):
         .format(PlansPageItem.PROGRESSIVE_DUMBBELL.value[0])
 
 
-def test_case_twelve(mobile_driver_opening_and_closing):
+def test_case_twelve(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -160,11 +161,11 @@ def test_case_twelve(mobile_driver_opening_and_closing):
                                                         .format(food_value_before, food_value_after)
 
 
-def test_case_thirteen(mobile_driver_opening_and_closing):
+def test_case_thirteen(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -219,11 +220,11 @@ def test_case_thirteen(mobile_driver_opening_and_closing):
     assert plans_page_base.is_page_opened(), "[Plans Page] Plans Page is not opened after clicking End Plan Button!"
 
 
-def test_case_fourteen(mobile_driver_opening_and_closing):
+def test_case_fourteen(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -238,13 +239,13 @@ def test_case_fourteen(mobile_driver_opening_and_closing):
         "[Newsfeed Page] User can not unlike posts on Newsfeed Page!"
 
 
-def test_case_fifteen(mobile_driver_opening_and_closing):
+def test_case_fifteen(mobile_driver_opening_and_closing, email, password):
     COMMENT = 'just a comment'
 
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -274,11 +275,11 @@ def test_case_fifteen(mobile_driver_opening_and_closing):
     attach_screenshot(driver)
 
 
-def test_case_sixteen(mobile_driver_opening_and_closing):
+def test_case_sixteen(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -385,11 +386,11 @@ def test_case_sixteen(mobile_driver_opening_and_closing):
     assert not newsfeed_page_base.is_articles_myfitnesspal_present(), "[Newsfeed Page] MyFitnessPal articles " \
                                                                   "are not present!"
 
-def test_case_seventeen(mobile_driver_opening_and_closing):
+def test_case_seventeen(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -405,11 +406,11 @@ def test_case_seventeen(mobile_driver_opening_and_closing):
         "[Plan Details Page] Opened wrong plan! Expected {}".format(PlansPageItem.TOTAL_BODY_POWER)
     attach_screenshot(driver)
 
-def test_case_eighteen(mobile_driver_opening_and_closing):
+def test_case_eighteen(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -449,11 +450,11 @@ def test_case_eighteen(mobile_driver_opening_and_closing):
         "[Plans Page] Workout Logged confirmation message is not present!"
     attach_screenshot(driver)
 
-def test_case_nineteen(mobile_driver_opening_and_closing):
+def test_case_nineteen(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 

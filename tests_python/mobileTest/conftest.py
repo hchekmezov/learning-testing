@@ -19,9 +19,10 @@ desired_caps = {
     "deviceName": "samsung",
     "platformName": "Android",
     "version": "9.0",
-    "udid": "ce07182773284537017e",
-    # "udid": "emulator-5554",
-    "app": "/Users/glebchekmezov/Library/MobileTesting/MyFitnessPal-21-03-2023.apk",
+    # "udid": "ce07182773284537017e",
+    "udid": "emulator-5554",
+    # "app": "/Users/glebchekmezov/Library/MobileTesting/MyFitnessPal-21-03-2023.apk",
+    "app": "https://www.googleapis.com/drive/v3/files/1T8TGoDIdml2MBW-MUn5m46G_qiJk4nxx?alt=media&key=AIzaSyBaC4EPP_FnI5u6Xwx-eZFvizk_a11yyvI",
     "automationName": "uiautomator2",
     "realDevice": True
 }
@@ -42,6 +43,27 @@ desired_caps = {
 #     "realDevice": True
 #     # "appWaitForLaunch": "false"
 # }
+
+
+def pytest_addoption(parser):
+    parser.addoption("--email", action="store", default="default email")
+    parser.addoption("--password", action="store", default="default password")
+
+
+@pytest.fixture(scope="session")
+def email(request):
+    email_value = request.config.option.email
+    if email_value is None:
+        pytest.skip()
+    return email_value
+
+
+@pytest.fixture(scope="session")
+def password(request):
+    password_value = request.config.option.password
+    if password_value is None:
+        pytest.skip()
+    return password_value
 
 
 @pytest.fixture(scope='function')

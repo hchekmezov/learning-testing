@@ -1,6 +1,6 @@
 resources/
 src/gui/constants.py
-src/mobile/utils/constants.py
+#src/mobile/utils/constants.py
 .idea/learningTesing.iml
 agent.yaml
 src/mobile/mobileTesting/MFP/pages/commons/common_pages_for_testing

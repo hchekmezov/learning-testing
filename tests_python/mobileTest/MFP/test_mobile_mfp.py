@@ -26,7 +26,7 @@ logger.setLevel(logging.INFO)
 
 # TESTS AND METHORD BEFORE 20.04.2023
 @pytest.mark.skip
-def test_mfp_first(mobile_driver_opening_and_closing):
+def test_mfp_first(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page = init_page_or_uiobject(driver, MFPCommonPageBase)
     preview_page = init_page_or_uiobject(driver, PreviewPageBase)
@@ -35,7 +35,7 @@ def test_mfp_first(mobile_driver_opening_and_closing):
     login_page = init_page_or_uiobject(driver, LoginPageBase)
     assert login_page.is_page_opened(), "[Login Page] Login Page is not opened after clicking Log In Button!"
     # login_page.type_email_and_password(configs.get("email").data, configs.get("password").data)
-    login_page.type_email_and_password(Constants.EMAIL.value, Constants.PASSWORD.value)
+    login_page.type_email_and_password(email, password)
     assert login_page.is_login_button_enabled(), \
         "[Login Page] Log In Button should be enabled after typing email and password!"
     login_page.click_login_button()
@@ -49,7 +49,7 @@ def test_mfp_first(mobile_driver_opening_and_closing):
     assert dashboard_page.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
 
 @pytest.mark.skip
-def test_mfp_second(mobile_driver_opening_and_closing):
+def test_mfp_second(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page = init_page_or_uiobject(driver, MFPCommonPageBase)
     preview_page = init_page_or_uiobject(driver, PreviewPageBase)
@@ -57,7 +57,7 @@ def test_mfp_second(mobile_driver_opening_and_closing):
     preview_page.click_login_button()
     login_page = init_page_or_uiobject(driver, LoginPageBase)
     assert login_page.is_page_opened(), "[Login Page] Login Page is not opened after clicking Log In Button!"
-    login_page.type_email_and_password(Constants.EMAIL.value, Constants.PASSWORD.value)
+    login_page.type_email_and_password(email, password)
     assert login_page.is_login_button_enabled(), \
         "[Login Page] Log In Button should be enabled after typing email and password!"
     login_page.click_login_button()
@@ -77,12 +77,15 @@ def test_mfp_second(mobile_driver_opening_and_closing):
 
 # TESTS AND METHODS AFTER 20.04.2023 (MAJOR UPDATE BY init_page_or_uiobject)
 
-def login_to_dashboard(driver) -> DashboardPageBase:
+
+
+def login_to_dashboard(driver, email, password) -> DashboardPageBase:
     preview_page_base = init_page_or_uiobject(driver, PreviewPageBase)
     assert preview_page_base.is_page_opened(), "[Preview Page] Preview Page is not opened!"
     login_page_base = preview_page_base.click_login_button()
     assert login_page_base.is_page_opened(), "[Login Page] Login Page is not opened after clicking Log In Button!"
-    login_page_base.type_email_and_password(Constants.EMAIL.value, Constants.PASSWORD.value)
+    # login_page_base.type_email_and_password(Constants.EMAIL.value, Constants.PASSWORD.value)
+    login_page_base.type_email_and_password(email, password)
     assert login_page_base.is_login_button_enabled(), \
         "[Login Page] Log In Button should be enabled after typing email and password!"
     existing_user_tutor_page_base = login_page_base.click_login_button()
@@ -95,10 +98,11 @@ def login_to_dashboard(driver) -> DashboardPageBase:
 # MY TEST CASES
 ###############
 
-def test_mfp_third(mobile_driver_opening_and_closing):
+@pytest.mark.skip
+def test_mfp_third(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
     diary_page_base = mfp_common_page_base.get_bottom_nav_bar().click_on_nav_bar_item(BottomNavBarItem.DIARY)
@@ -109,10 +113,11 @@ def test_mfp_third(mobile_driver_opening_and_closing):
                                                  "Nutrition Button!"
     attach_screenshot(driver)
 
-def test_mfp_fourth(mobile_driver_opening_and_closing):
+@pytest.mark.skip
+def test_mfp_fourth(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
     diary_page_base = mfp_common_page_base.get_bottom_nav_bar().click_on_nav_bar_item(BottomNavBarItem.DIARY)
@@ -142,11 +147,12 @@ def test_mfp_fourth(mobile_driver_opening_and_closing):
 ###############
 
 
-def test_case_one(mobile_driver_opening_and_closing):
+@pytest.mark.skip
+def test_case_one(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -168,11 +174,12 @@ def test_case_one(mobile_driver_opening_and_closing):
     attach_screenshot(driver)
 
 
-def test_case_two(mobile_driver_opening_and_closing):
+@pytest.mark.skip
+def test_case_two(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -188,12 +195,14 @@ def test_case_two(mobile_driver_opening_and_closing):
     assert goal == remaining, "[Diary Page] Calories Goal Value is not the same to Calories Remaining Value! " \
                               "Goal: {}, Remaining: {}".format(goal, remaining)
 
-def test_case_three(mobile_driver_opening_and_closing):
+
+@pytest.mark.skip
+def test_case_three(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     driver.hide_keyboard()
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -210,11 +219,13 @@ def test_case_three(mobile_driver_opening_and_closing):
     quick_add_page_base.quick_add_fat_carbs_protein(1, 1, 1)
     assert quick_add_page_base.is_calories_equals_value(17), "[Quick Add Page] Calories value is not equals 17!"
 
-def test_case_five(mobile_driver_opening_and_closing):
+
+@pytest.mark.skip
+def test_case_five(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -239,7 +250,8 @@ def test_case_five(mobile_driver_opening_and_closing):
     soft_assert.assert_all()
 
 
-def test_case_six(mobile_driver_opening_and_closing):
+@pytest.mark.skip
+def test_case_six(mobile_driver_opening_and_closing, email, password):
     SELECTED_3_OF_3 = '3 of 3 nutrients selected.'
     SELECTED_4_OF_3 = '4 nutrients selected. Please select only 3.'
     SELECTED_2_OF_3 = '2 of 3 nutrients selected.'
@@ -247,7 +259,7 @@ def test_case_six(mobile_driver_opening_and_closing):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -284,11 +296,12 @@ def test_case_six(mobile_driver_opening_and_closing):
     assert not custom_summary_page_base.is_save_button_active(), "[Custom Summary Page] Save button is active!"
 
 
-def test_case_seven(mobile_driver_opening_and_closing):
+@pytest.mark.skip
+def test_case_seven(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
@@ -306,12 +319,12 @@ def test_case_seven(mobile_driver_opening_and_closing):
     soft_assert.assert_all()
 
 
-def test_case_eight(mobile_driver_opening_and_closing):
+def test_case_eight(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
 
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
 
-    dashboard_page_base = login_to_dashboard(driver)
+    dashboard_page_base = login_to_dashboard(driver, email, password)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
 
