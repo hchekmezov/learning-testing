@@ -23,6 +23,8 @@ desired_caps = {
     "udid": "emulator-5554",
     # "app": "/Users/glebchekmezov/Library/MobileTesting/MyFitnessPal-21-03-2023.apk",
     "app": "https://www.googleapis.com/drive/v3/files/1T8TGoDIdml2MBW-MUn5m46G_qiJk4nxx?alt=media&key=AIzaSyBaC4EPP_FnI5u6Xwx-eZFvizk_a11yyvI",
+    "androidInstallTimeout": "120000",
+    "appWaitForLaunch": "false",
     "automationName": "uiautomator2",
     "realDevice": True
 }
