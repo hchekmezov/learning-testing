@@ -23,7 +23,8 @@ class MorePage(MorePageBase):
 
     def is_option_present(self, option: MoreMenuOption) -> bool:
         self.__option = (AppiumBy.XPATH, "//*[@text='{}']".format(option.get_text()))
-        return swipeToElementVerticalWithCount(self.__option, 7, self.driver, OS.ANDROID)
+        return swipeToElementVerticalWithCountAndDuration(self.__option, 7, 600, self.driver, OS.ANDROID)
+        # return swipeToElementVerticalWithCount(self.__option, 7, self.driver, OS.ANDROID)
 
     def click_option(self, option: MoreMenuOption) -> AbstractPage:
         if self.is_option_present(option):

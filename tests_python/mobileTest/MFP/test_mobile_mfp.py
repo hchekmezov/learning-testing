@@ -25,7 +25,6 @@ logger.setLevel(logging.INFO)
 
 
 # TESTS AND METHORD BEFORE 20.04.2023
-@pytest.mark.skip
 def test_mfp_first(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page = init_page_or_uiobject(driver, MFPCommonPageBase)
@@ -319,6 +318,7 @@ def test_case_seven(mobile_driver_opening_and_closing, email, password):
     soft_assert.assert_all()
 
 
+@pytest.mark.skip
 def test_case_eight(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
 

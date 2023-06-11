@@ -10,5 +10,5 @@ reporting:
   run:
     environment: mfp from local
     treat_skips_as_failures: false
-    display-name: MFP Testing by Python
+    display-name: API Demos testing by Python
 #    build: 1.12.1.96-SNAPSHOT

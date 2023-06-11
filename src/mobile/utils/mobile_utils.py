@@ -1,3 +1,4 @@
+from appium.webdriver import WebElement
 from appium.webdriver.common.touch_action import TouchAction
 from pytest_zebrunner.zebrunner_logging import ZebrunnerHandler
 import logging
@@ -81,72 +82,72 @@ def isVisibleMethod(timeout, locator, driver) -> bool:
 
 
 def swipeInContainer(container, direction, count, duration, driver, os: OS) -> bool:
-        """**container** should be transferred like: *driver.find_element(container[0], container[1])*
+    """**container** should be transferred like: *driver.find_element(container[0], container[1])*
         or
         *driver.find_element(\*container)*"""
 
-        elementLocation = None # Point
-        elementDimensions = None # Dimension
-        if container == None:
-            elementLocation = Point(0, 0)
-            deviceSize = driver.get_window_size()
-            elementDimensions = Dimension(deviceSize['width'], deviceSize['height'])
-        else:
-            # isContainerVisible = EC.visibility_of(container)
-            # if isinstance(isContainerVisible, WebElement):
-            #     isContainerVisible = True
-            # else:
-            #     isContainerVisible = False
+    elementLocation = None  # Point
+    elementDimensions = None  # Dimension
+    if container == None:
+        elementLocation = Point(0, 0)
+        deviceSize = driver.get_window_size()
+        elementDimensions = Dimension(deviceSize['width'], deviceSize['height'])
+    else:
+        # isContainerVisible = EC.visibility_of(container)
+        # if isinstance(isContainerVisible, WebElement):
+        #     isContainerVisible = True
+        # else:
+        #     isContainerVisible = False
 
-            if not container.is_displayed():
-                logger.warning("Cannot swipe! Impossible to find element " + str(container))
+        if not container.is_displayed():
+            logger.warning("Cannot swipe! Impossible to find element " + str(container))
 
-            elementLocation = Point(container.location['x'], container.location['y'])
-            elementDimensions = Dimension(container.size['width'], container.size['height'])
+        elementLocation = Point(container.location['x'], container.location['y'])
+        elementDimensions = Dimension(container.size['width'], container.size['height'])
 
-        minCoefficient = 0.3
-        maxCoefficient = 0.6
-        if (os.value == "Android"):
-            minCoefficient = 0.25
-            maxCoefficient = 0.5
-        elif os.value == "IOS" or os.value == "MAC" or os.value == "TVOS":
-            minCoefficient = 0.25
-            maxCoefficient = 0.8
+    minCoefficient = 0.3
+    maxCoefficient = 0.6
+    if (os.value == "Android"):
+        minCoefficient = 0.25
+        maxCoefficient = 0.5
+    elif os.value == "IOS" or os.value == "MAC" or os.value == "TVOS":
+        minCoefficient = 0.25
+        maxCoefficient = 0.8
 
-        startx = 0
-        starty = 0
-        endx = 0
-        endy = 0
-        if direction.value == "UP":
-                startx = endx = elementLocation.getX() + round(float(elementDimensions.getWidth()) / 2.0)
-                starty = (int)(elementLocation.getY() + round(maxCoefficient * float(elementDimensions.getHeight())))
-                endy = (int)(elementLocation.getY() + round(minCoefficient * float(elementDimensions.getHeight())))
-        elif direction.value == "DOWN":
-                startx = endx = elementLocation.getX() + round(float(elementDimensions.getWidth()) / 2.0)
-                starty = (int)(elementLocation.getY() + round(minCoefficient * float(elementDimensions.getHeight())))
-                endy = (int)(elementLocation.getY() + round(maxCoefficient * float(elementDimensions.getHeight())))
-        elif direction.value == "LEFT":
-                starty = endy = elementLocation.getY() + round(float(elementDimensions.getHeight()) / 2.0)
-                startx = (int)(elementLocation.getX() + round(maxCoefficient * float(elementDimensions.getWidth())))
-                endx = (int)(elementLocation.getX() + round(minCoefficient * float(elementDimensions.getWidth())))
-        elif direction.value == "RIGHT":
-                starty = endy = elementLocation.getY() + round(float(elementDimensions.getHeight()) / 2.0)
-                startx = (int)(elementLocation.getX() + round(minCoefficient * float(elementDimensions.getWidth())))
-                endx = (int)(elementLocation.getX() + round(maxCoefficient * float(elementDimensions.getWidth())))
-        else:
-                raise Exception('Unsupported operation')
+    startx = 0
+    starty = 0
+    endx = 0
+    endy = 0
+    if direction.value == "UP":
+        startx = endx = elementLocation.getX() + round(float(elementDimensions.getWidth()) / 2.0)
+        starty = (int)(elementLocation.getY() + round(maxCoefficient * float(elementDimensions.getHeight())))
+        endy = (int)(elementLocation.getY() + round(minCoefficient * float(elementDimensions.getHeight())))
+    elif direction.value == "DOWN":
+        startx = endx = elementLocation.getX() + round(float(elementDimensions.getWidth()) / 2.0)
+        starty = (int)(elementLocation.getY() + round(minCoefficient * float(elementDimensions.getHeight())))
+        endy = (int)(elementLocation.getY() + round(maxCoefficient * float(elementDimensions.getHeight())))
+    elif direction.value == "LEFT":
+        starty = endy = elementLocation.getY() + round(float(elementDimensions.getHeight()) / 2.0)
+        startx = (int)(elementLocation.getX() + round(maxCoefficient * float(elementDimensions.getWidth())))
+        endx = (int)(elementLocation.getX() + round(minCoefficient * float(elementDimensions.getWidth())))
+    elif direction.value == "RIGHT":
+        starty = endy = elementLocation.getY() + round(float(elementDimensions.getHeight()) / 2.0)
+        startx = (int)(elementLocation.getX() + round(minCoefficient * float(elementDimensions.getWidth())))
+        endx = (int)(elementLocation.getX() + round(maxCoefficient * float(elementDimensions.getWidth())))
+    else:
+        raise Exception('Unsupported operation')
 
-        logger.debug("Swipe from (X = {startx}; Y = {starty}) to (X = {endx}; Y = {endy})"
-                     .format(startx=startx, starty=starty, endx=endx, endy=endy))
+    logger.debug("Swipe from (X = {startx}; Y = {starty}) to (X = {endx}; Y = {endy})"
+                 .format(startx=startx, starty=starty, endx=endx, endy=endy))
 
-        try:
-            for i in range (0, count):
-                driver.swipe(start_x=startx, start_y=starty, end_x=endx, end_y=endy, duration=duration)
-            return True
-        except Exception as e:
-            logger.error("Error during Swipe from (X = {startx}; Y = {starty}) to (X = {endx}; Y = {endy}): {e}"
-                         .format(startx=startx, starty=starty, endx=endx, endy=endy, e=e))
-            return False
+    try:
+        for i in range(0, count):
+            driver.swipe(start_x=startx, start_y=starty, end_x=endx, end_y=endy, duration=duration)
+        return True
+    except Exception as e:
+        logger.error("Error during Swipe from (X = {startx}; Y = {starty}) to (X = {endx}; Y = {endy}): {e}"
+                     .format(startx=startx, starty=starty, endx=endx, endy=endy, e=e))
+        return False
 
 
 def swipeInContainerOneCount(container, direction: Direction, duration: int, driver, os: OS) -> bool:
@@ -162,86 +163,85 @@ def swipeWithDirection(locator, container, direction: Direction, driver, os: OS)
 
 
 def swipe(locator, container, direction: Direction, count: int, duration: int, driver, os: OS) -> bool:
+    isVisible = isVisibleMethod(timeout=1, locator=locator, driver=driver)
 
-        isVisible = isVisibleMethod(timeout=1, locator=locator, driver=driver)
-
-        if isVisible:
-            element = driver.find_element(locator[0], locator[1])
-            logger.info("Element already present before swipe: " + str(element))
-            return True
-        else:
-            logger.info("Swiping to needed element")
+    if isVisible:
+        element = driver.find_element(locator[0], locator[1])
+        logger.info("Element already present before swipe: " + str(element))
+        return True
+    else:
+        logger.info("Swiping to needed element")
+        oppositeDirection = Direction.DOWN
+        bothDirections = False
+        if direction.value == "UP":
             oppositeDirection = Direction.DOWN
-            bothDirections = False
-            if direction.value == "UP":
-                oppositeDirection = Direction.DOWN
-            elif direction.value == "DOWN":
-                oppositeDirection = Direction.UP
-            elif direction.value == "LEFT":
-                oppositeDirection = Direction.RIGHT
-            elif direction.value == "RIGHT":
-                oppositeDirection = Direction.LEFT
-            elif direction.value == "HORIZONTAL":
-                direction = Direction.LEFT
-                oppositeDirection = Direction.RIGHT
-                bothDirections = True
-            elif direction.value == "HORIZONTAL_RIGHT_FIRST":
-                direction = Direction.RIGHT
-                oppositeDirection = Direction.LEFT
-                bothDirections = True
-            elif direction.value == "VERTICAL":
-                direction = Direction.UP
-                oppositeDirection = Direction.DOWN
-                bothDirections = True
-            elif direction.value == "VERTICAL_DOWN_FIRST":
-                direction = Direction.DOWN
-                oppositeDirection = Direction.UP
-                bothDirections = True
-            else:
-                    raise Exception("Unsupported direction for swipeInContainerTillElement: " + str(direction))
+        elif direction.value == "DOWN":
+            oppositeDirection = Direction.UP
+        elif direction.value == "LEFT":
+            oppositeDirection = Direction.RIGHT
+        elif direction.value == "RIGHT":
+            oppositeDirection = Direction.LEFT
+        elif direction.value == "HORIZONTAL":
+            direction = Direction.LEFT
+            oppositeDirection = Direction.RIGHT
+            bothDirections = True
+        elif direction.value == "HORIZONTAL_RIGHT_FIRST":
+            direction = Direction.RIGHT
+            oppositeDirection = Direction.LEFT
+            bothDirections = True
+        elif direction.value == "VERTICAL":
+            direction = Direction.UP
+            oppositeDirection = Direction.DOWN
+            bothDirections = True
+        elif direction.value == "VERTICAL_DOWN_FIRST":
+            direction = Direction.DOWN
+            oppositeDirection = Direction.UP
+            bothDirections = True
+        else:
+            raise Exception("Unsupported direction for swipeInContainerTillElement: " + str(direction))
 
-            currentCount = count
-            while currentCount > 0 and not isVisible:
-                logger.debug(
-                    f"Element not present! Swipe {direction} will be executed to element")
-                swipeInContainerOneCount(container=container, direction=direction, duration=duration, driver=driver,
-                                         os=os)
-                logger.info(f"Swipe was executed. Attempts remain: {currentCount}")
-                isVisible = isVisibleMethod(timeout=1, locator=locator, driver=driver)
-                # try:
-                #     element = driver.find_element(locator[0], locator[1])
-                #     isVisible = True
-                # except:
-                #     isVisible = False
+        currentCount = count
+        while currentCount > 0 and not isVisible:
+            logger.debug(
+                f"Element not present! Swipe {direction} will be executed to element")
+            swipeInContainerOneCount(container=container, direction=direction, duration=duration, driver=driver,
+                                     os=os)
+            logger.info(f"Swipe was executed. Attempts remain: {currentCount}")
+            isVisible = isVisibleMethod(timeout=1, locator=locator, driver=driver)
+            # try:
+            #     element = driver.find_element(locator[0], locator[1])
+            #     isVisible = True
+            # except:
+            #     isVisible = False
 
-                # if isinstance(isVisible, WebElement):
-                #     isVisible = True
-                # else:
-                #     isVisible = False
-                currentCount -= 1
+            # if isinstance(isVisible, WebElement):
+            #     isVisible = True
+            # else:
+            #     isVisible = False
+            currentCount -= 1
 
-            currentCount = count
+        currentCount = count
 
-            while bothDirections and not isVisible and currentCount > 0:
-                logger.debug(
-                    f"Element not present! Swipe {oppositeDirection} will be executed to element")
-                swipeInContainerOneCount(container=container, direction=oppositeDirection,
-                                         duration=duration, driver=driver, os=os)
-                isVisible = isVisibleMethod(timeout=1, driver=driver, locator=locator)
-                # try:
-                #     element = driver.find_element(locator[0], locator[1])
-                #     isVisible = True
-                # except:
-                #     isVisible = False
-                # if isinstance(isVisible, WebElement):
-                #     isVisible = True
-                # else:
-                #     isVisible = False
-                logger.info(f"Swipe was executed. Attempts remain: {currentCount}")
-                currentCount -= 1
+        while bothDirections and not isVisible and currentCount > 0:
+            logger.debug(
+                f"Element not present! Swipe {oppositeDirection} will be executed to element")
+            swipeInContainerOneCount(container=container, direction=oppositeDirection,
+                                     duration=duration, driver=driver, os=os)
+            isVisible = isVisibleMethod(timeout=1, driver=driver, locator=locator)
+            # try:
+            #     element = driver.find_element(locator[0], locator[1])
+            #     isVisible = True
+            # except:
+            #     isVisible = False
+            # if isinstance(isVisible, WebElement):
+            #     isVisible = True
+            # else:
+            #     isVisible = False
+            logger.info(f"Swipe was executed. Attempts remain: {currentCount}")
+            currentCount -= 1
 
-            logger.info("Result: " + str(isVisible))
-            return isVisible
+        logger.info("Result: " + str(isVisible))
+        return isVisible
 
 
 def swipeUpOneCount(duration: int, driver, os: OS):
@@ -257,7 +257,7 @@ def swipeLeftOneCount(duration: int, driver, os: OS):
     swipeLeftInContainer(None, duration, driver, os)
 
 
-def swipeLeft(duration: int , times: int, driver, os: OS):
+def swipeLeft(duration: int, times: int, driver, os: OS):
     for i in range(times):
         swipeLeftOneCount(duration, driver, os)
 
@@ -319,7 +319,26 @@ def swipeToElementDownWithDuration(locator, duration: int, driver: Remote, os: O
     return swipe(locator, None, Direction.DOWN, 50, duration, driver, os)
 
 
-def long_press_on_element(element, driver: Remote):
-    actions = TouchAction(driver)
-    actions.long_press(element, duration=2000)
-    actions.perform()
+def swipeToAndClickElementVerticalWithDuration(locator, duration: int, driver: Remote, os: OS):
+    if swipe(locator, None, Direction.VERTICAL, 50, duration, driver, os):
+        driver.find_element(*locator).click()
+
+def swipeToAndClickElementVerticalWithCount(locator, count: int, driver: Remote, os: OS):
+    if swipe(locator, None, Direction.VERTICAL, count, 1000, driver, os):
+        driver.find_element(*locator).click()
+
+def swipeToAndClickElementVerticalWithCountAndDuration(locator, count: int, duration: int, driver: Remote, os: OS):
+    if swipe(locator, None, Direction.VERTICAL, count, duration, driver, os):
+        driver.find_element(*locator).click()
+
+
+def long_press_on_element(element: WebElement, driver: Remote):
+    action = TouchAction(driver)
+    action.long_press(element, duration=2000)
+    action.perform()
+
+
+def drag_and_drop(driver: Remote, source_elem: WebElement, destination_elem: WebElement):
+    action = TouchAction(driver)
+    action.long_press(source_elem).move_to(destination_elem).release()
+    action.perform()

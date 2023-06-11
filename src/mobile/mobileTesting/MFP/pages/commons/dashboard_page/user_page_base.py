@@ -4,6 +4,7 @@ from appium.webdriver import Remote
 
 from src.mobile.abstract.abstract_page import AbstractPage
 from src.mobile.mobileTesting.MFP.pages.commons.dashboard_page.create_food_page_base import CreateFoodPageBase
+from src.mobile.mobileTesting.MFP.pages.commons.dashboard_page.goals_page_base import GoalsPageBase
 
 
 class UserPageBase(AbstractPage):
@@ -27,5 +28,13 @@ class UserPageBase(AbstractPage):
         return
 
     @abc.abstractmethod
-    def open_dashboard_page(self):
+    def click_back_button(self):
+        return
+
+    @abc.abstractmethod
+    def click_update_goals_button(self) -> GoalsPageBase:
+        return
+
+    @abc.abstractmethod
+    def get_number_of_daily_goal(self):
         return

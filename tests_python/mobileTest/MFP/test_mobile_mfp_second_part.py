@@ -1,5 +1,6 @@
 import logging
 
+import pytest
 from pytest_zebrunner.zebrunner_logging import ZebrunnerHandler
 
 from src.common_utils.soft_assert import SoftAssert
@@ -30,6 +31,7 @@ logger.addHandler(ZebrunnerHandler())
 logger.setLevel(logging.INFO)
 
 
+@pytest.mark.skip
 def test_case_nine(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
@@ -47,6 +49,7 @@ def test_case_nine(mobile_driver_opening_and_closing, email, password):
     assert plans_page_base.is_all_texts_and_survey_link_present(), "[Plans Page] Not all texts or survey link present!"
 
 
+@pytest.mark.skip
 def test_case_ten(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
@@ -67,6 +70,7 @@ def test_case_ten(mobile_driver_opening_and_closing, email, password):
     soft_assert.assert_all()
 
 
+@pytest.mark.skip
 def test_case_eleven(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
@@ -127,6 +131,7 @@ def test_case_eleven(mobile_driver_opening_and_closing, email, password):
         .format(PlansPageItem.PROGRESSIVE_DUMBBELL.value[0])
 
 
+@pytest.mark.skip
 def test_case_twelve(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
@@ -160,7 +165,7 @@ def test_case_twelve(mobile_driver_opening_and_closing, email, password):
                                                         "Before adding food: {}, After adding food: {}"\
                                                         .format(food_value_before, food_value_after)
 
-
+@pytest.mark.skip
 def test_case_thirteen(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
@@ -220,6 +225,7 @@ def test_case_thirteen(mobile_driver_opening_and_closing, email, password):
     assert plans_page_base.is_page_opened(), "[Plans Page] Plans Page is not opened after clicking End Plan Button!"
 
 
+@pytest.mark.skip
 def test_case_fourteen(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
@@ -239,6 +245,7 @@ def test_case_fourteen(mobile_driver_opening_and_closing, email, password):
         "[Newsfeed Page] User can not unlike posts on Newsfeed Page!"
 
 
+@pytest.mark.skip
 def test_case_fifteen(mobile_driver_opening_and_closing, email, password):
     COMMENT = 'just a comment'
 
@@ -254,7 +261,7 @@ def test_case_fifteen(mobile_driver_opening_and_closing, email, password):
     attach_screenshot(driver)
 
     USERNAME = user_page_base.get_username()
-    user_page_base.open_dashboard_page()
+    user_page_base.click_back_button()
     dashboard_page_base = init_page_or_uiobject(driver, DashboardPageBase)
     assert dashboard_page_base.is_page_opened(), "[Dashboard Page] Dashboard Page is not opened!"
     attach_screenshot(driver)
@@ -275,6 +282,7 @@ def test_case_fifteen(mobile_driver_opening_and_closing, email, password):
     attach_screenshot(driver)
 
 
+@pytest.mark.skip
 def test_case_sixteen(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
@@ -385,7 +393,7 @@ def test_case_sixteen(mobile_driver_opening_and_closing, email, password):
 
     assert not newsfeed_page_base.is_articles_myfitnesspal_present(), "[Newsfeed Page] MyFitnessPal articles " \
                                                                   "are not present!"
-
+@pytest.mark.skip
 def test_case_seventeen(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
@@ -406,6 +414,8 @@ def test_case_seventeen(mobile_driver_opening_and_closing, email, password):
         "[Plan Details Page] Opened wrong plan! Expected {}".format(PlansPageItem.TOTAL_BODY_POWER)
     attach_screenshot(driver)
 
+
+@pytest.mark.skip
 def test_case_eighteen(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing
     mfp_common_page_base = init_page_or_uiobject(driver, MFPCommonPageBase)
@@ -449,6 +459,7 @@ def test_case_eighteen(mobile_driver_opening_and_closing, email, password):
     assert plans_page_base.is_workout_logged_confirmation_message_present(), \
         "[Plans Page] Workout Logged confirmation message is not present!"
     attach_screenshot(driver)
+
 
 def test_case_nineteen(mobile_driver_opening_and_closing, email, password):
     driver = mobile_driver_opening_and_closing

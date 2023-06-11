@@ -1,10 +1,11 @@
 from enum import Enum
 
+from src.mobile.mobileTesting.MFP.pages.commons.more_page.edit_profile_page_base import EditProfilePageBase
 from src.mobile.mobileTesting.MFP.pages.commons.more_page.privacy_center_page_base import PrivacyCenterPageBase
 
 
 class SettingsItem(Enum):
-    EDIT_PROFILE = ('com.myfitnesspal.android:id/textEditProfile', None)
+    EDIT_PROFILE = ('com.myfitnesspal.android:id/textEditProfile', EditProfilePageBase)
     MY_GOALS = ('com.myfitnesspal.android:id/textMyGoals', None)
     PREMIUM_SUBSCRIPTION = ('com.myfitnesspal.android:id/textPremiumSubscription', None)
     MY_APPS_AND_DEVICES = ('com.myfitnesspal.android:id/textAppsDevices', None)
