@@ -1,6 +1,10 @@
+import base64
+import os
+
 import pytest
 from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
+from pytest_zebrunner import attach_test_run_artifact, attach_test_artifact
 
 # desired_caps for iOS
 # desired_caps = {
@@ -76,6 +80,36 @@ def mobile_driver_opening_and_closing():
     driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
     yield driver
     driver.quit()
+
+
+counter = 1
+@pytest.fixture(autouse=True)
+def video_recording(mobile_driver_opening_and_closing):
+    driver = mobile_driver_opening_and_closing
+
+    global counter
+
+    driver.start_recording_screen()
+
+    yield
+
+    parent_dir = os.path.join(os.path.abspath(os.getcwd()), "artifacts")
+    parent_dir = os.path.join(parent_dir, "test_sessions")
+    path = os.path.join(parent_dir, str(driver.session_id))
+    os.mkdir(path)
+
+    video_rawdata = driver.stop_recording_screen()
+
+    videopath = os.path.join(path, "video{}.mp4".format(counter))
+    with open(videopath, "wb") as vd:
+        vd.write(base64.b64decode(video_rawdata))
+
+    attach_test_run_artifact(videopath)
+
+    counter += 1
+
+
+
 
 
 # DRIVER CAPABILITIES EXAMPLE:

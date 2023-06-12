@@ -2,6 +2,10 @@ from enum import Enum
 
 from src.mobile.mobileTesting.API_Demos.pages.commons.start_page.api_demos_page.views_page.drag_and_drop_page_base import \
     DragAndDropPageBase
+from src.mobile.mobileTesting.API_Demos.pages.commons.start_page.api_demos_page.views_page.popup_menu_page_base import \
+    PopupMenuPageBase
+from src.mobile.mobileTesting.API_Demos.pages.commons.start_page.api_demos_page.views_page.visibility_page_base import \
+    VisibilityPageBase
 
 
 class ViewsPageItem(Enum):
@@ -25,7 +29,7 @@ class ViewsPageItem(Enum):
     LAYOUT_ANIMATION = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='Layout Animation']", None)
     LAYOUTS = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='Layouts']", None)
     LISTS = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='Lists']", None)
-    POPUP_MENU = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='Popup Menu']", None)
+    POPUP_MENU = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='Popup Menu']", PopupMenuPageBase)
     PROGRESS_BAR = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='Progress Bar']", None)
     RADIO_GROUP = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='Radio Group']", None)
     RATING_BAR = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='Rating Bar']", None)
@@ -43,7 +47,7 @@ class ViewsPageItem(Enum):
     TABS = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='Tabs']", None)
     TEXT_CLOCK = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='TextClock']", None)
     TEXT_SWITCHER = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='TextSwitcher']", None)
-    VISIBILITY = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='Visibility']", None)
+    VISIBILITY = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='Visibility']", VisibilityPageBase)
     WEB_VIEW = ("//*[@resource-id='android:id/list']/android.widget.TextView[@text='WebView']", None)
 
     def get_xpath(self):
